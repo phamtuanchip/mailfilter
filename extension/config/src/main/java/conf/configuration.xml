@@ -86,7 +86,9 @@
                   <value>
                       <string>mailfilter</string>
                   </value>
-                
+                <value>
+                      <string>mailfilterResources</string>
+                  </value>
                 <value>
                   <string>mailfilterExtension</string>
                 </value>

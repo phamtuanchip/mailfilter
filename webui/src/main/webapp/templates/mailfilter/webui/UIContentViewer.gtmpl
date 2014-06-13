@@ -1,8 +1,6 @@
 <%
 
     import org.mailfilter.ui.view.UITest;
-	import org.mailfilter.ui.view.UIResourceViewer;
-    import org.mailfilter.service.model.Attachment;
 
     try {
     def rcontext = _ctx.getRequestContext() ;
@@ -17,12 +15,8 @@
 <div id="UIContentViewer" class="UIContentViewer">
 
     <%
-    	 
         if(uicomponent.getChild(UITest.class).isRendered()){
         uicomponent.renderChild(UITest.class);
-        }  
-    	if(uicomponent.getChild(UIResourceViewer.class).isRendered()){
-        uicomponent.renderChild(UIResourceViewer.class);
         }  
      %>
  

@@ -32,7 +32,7 @@
       <node>
           <name>mailfilterPage</name>
           <label>#{portal.classic.mailfilterPage}</label>
-          <page-reference>portal::classic::mailfilter</page-reference>
+          <page-reference>portal::classic::mailfilterPage</page-reference>
       </node>
     <node>
       <name>groupnavigation</name>

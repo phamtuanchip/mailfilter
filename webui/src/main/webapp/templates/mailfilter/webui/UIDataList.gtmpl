@@ -1,0 +1,47 @@
+<%
+import org.mailfilter.service.model.Spamer;
+%>
+<div id="UILessonList" class="UILessonList">
+<div class="list-group">
+              <a href="#" class="list-group-item active">
+    Management
+	</a>
+            <a class="list-group-item" href="#" onclick="<%=uicomponent.event("Resource")%>" rel="tooltip" data-placement="bottom" title="List all pending spamer">
+                <i>Pending</i>
+            </a>
+			 <a class="list-group-item" href="#" onclick="<%=uicomponent.event("Test")%>"   rel="tooltip" data-placement="bottom" title="list all blocked">
+                <i>Blocked</i>
+            </a>  
+             
+            <a class="list-group-item" href="#" onclick="<%=uicomponent.event("AddLesson")%>"    rel="tooltip" data-placement="bottom" title="add new spamer">
+                <i>Add Spamer</i>
+            </a>
+         
+            <a class="list-group-item" href="#" onclick="javaScrip:void();"  rel="tooltip" data-placement="bottom" title="add new Question">
+                <i>Add Rule</i>
+            </a>
+         
+           
+         
+          
+   
+</div>
+
+ <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">new spamer detected</h3>
+            </div>
+            <div class="panel-body">
+               
+
+    <ul>
+    <% 
+    	for (Spamer e : uicomponent.getList()) {
+    %>
+        <li class="toctree-l2"><a class="reference internal" href="#">$e.email</a></li>
+       
+    <% } %>
+    </ul>
+	</div>
+	</div>
+</div>

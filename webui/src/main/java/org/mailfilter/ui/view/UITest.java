@@ -1,23 +1,16 @@
 package org.mailfilter.ui.view;
 
+import java.util.Collection;
+
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.mailfilter.service.model.ESession;
+import org.mailfilter.service.model.Spammer;
 import org.mailfilter.service.storage.DataStorage;
 import org.mailfilter.ui.portlet.MailfilterPortlet;
-
-import java.util.Collection;
-
-/**
- * Created with IntelliJ IDEA.
- * User: tuanp
- * Date: 10/22/13
- * Time: 6:18 PM
- * To change this template use File | Settings | File Templates.
- */
+ 
 @ComponentConfig(
         template =  "app:/templates/mailfilter/webui/UITest.gtmpl",
         events = {
@@ -28,12 +21,12 @@ import java.util.Collection;
         }
 )
 public class UITest extends UIContainer {
-  Collection<ESession> list;
+  Collection<Spammer> list;
 
   public UITest() {
     DataStorage service = MailfilterPortlet.getDataService();
     try {
-      list = service.getSessions();
+      list = service.listSpamer();
     } catch (Exception e) {
       e.printStackTrace();
     }

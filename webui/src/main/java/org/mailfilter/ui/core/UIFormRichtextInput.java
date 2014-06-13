@@ -3,13 +3,7 @@ package org.mailfilter.ui.core;
 
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.form.UIFormInputBase;
-
-/**
- * Created by The eXo Platform SAS
- * Author : Ha Quang Tan
- *          tanhq@exoplatform.com
- * July 15, 2013
- */
+ 
 public class UIFormRichtextInput extends UIFormInputBase<String> {
 
   public static final String FULL_TOOLBAR = "CompleteWCM";

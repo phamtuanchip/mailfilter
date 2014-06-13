@@ -49,23 +49,6 @@
   <activeProfiles>
     <activeProfile>exo-central</activeProfile>
   </activeProfiles>
-   <proxies>
-    <proxy>
-      <id>httpproxy</id>
-      <active>true</active>
-      <protocol>http</protocol>
-      <host>10.225.1.1</host>
-      <port>3128</port>
-      
-    </proxy>
-	 <proxy>
-      <id>httpsproxy</id>
-      <active>true</active>
-      <protocol>https</protocol>
-      <host>10.225.1.1</host>
-      <port>3128</port>
-      
-    </proxy>
-  </proxies>
+    
 </settings>
 

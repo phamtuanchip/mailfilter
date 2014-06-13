@@ -8,14 +8,7 @@ import org.mailfilter.service.storage.impl.JcrDataStorage;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * Created with IntelliJ IDEA.
- * User: tuanp
- * Date: 10/28/13
- * Time: 1:35 PM
- * To change this template use File | Settings | File Templates.
- */
-
+ 
 public class Loader {
   public static final int DEFAULT_VALUE_UPLOAD_PORTAL = -1;
   public static final int DEFAULT_MAX_UPLOAD_FIELD = 10;
