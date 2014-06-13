@@ -1,0 +1,11 @@
+language: java
+before_install:
+install: 
+- echo off
+#- mvn clean install -s settings.xml -Ppkg-tomcat -Ddownload
+script:
+- ./mvn-pkg.sh
+notifications:
+  email:
+    - gatein.elearning@gmail.com
+  
