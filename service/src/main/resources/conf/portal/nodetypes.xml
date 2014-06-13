@@ -24,7 +24,7 @@
         <valueConstraints/>
       </propertyDefinition>
       
-      <propertyDefinition name="exo:sender" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+      <propertyDefinition name="exo:sender" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>

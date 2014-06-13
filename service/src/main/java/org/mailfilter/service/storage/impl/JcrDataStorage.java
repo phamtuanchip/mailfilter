@@ -1,4 +1,4 @@
- 
+
 package org.mailfilter.service.storage.impl;
 
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
@@ -159,13 +160,25 @@ public class JcrDataStorage implements DataStorage {
 
 
 	@Override
-	public Spammer getSpammerById() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Spammer getSpammerById(String id) throws Exception {
+		try {
+			Node sesHome = getFilterHome();
+			Spammer s = getSpamerProp(sesHome.getNode(id));
+			return s;
+		} catch (PathNotFoundException pe) {
+			log.info("not found getSpammerById " + pe.getMessage());
+			throw new ItemNotFoundException(pe.getMessage());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			log.error("error getSpammerById " + e.getMessage());
+			throw e;
+
+		}
 	}
 
 	@Override
-	public Collection<Spammer> listSpamer() throws Exception {
+	public Collection<Spammer> listSpammer() throws Exception {
 		Collection<Spammer> list = new ArrayList<Spammer>();
 		try {
 			Node sesHome = getFilterHome();
@@ -201,8 +214,18 @@ public class JcrDataStorage implements DataStorage {
 
 	@Override
 	public Spammer updateSpammer(Spammer s) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Node qHome = getFilterHome();
+		Node spamerNode ;
+		try {
+			spamerNode = setSpamerProp(s, qHome.getNode(s.getId()));
+			spamerNode.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("error updateSpammer " + e.getMessage());
+			throw e;
+		}
+
+		return s;
 	}
 
 	@Override
@@ -255,5 +278,28 @@ public class JcrDataStorage implements DataStorage {
 			return null ;
 		}
 		return tes;
+	}
+
+
+
+
+
+	@Override
+	public Collection<Spammer> listSpammerByStatus(String status) throws Exception {
+		Collection<Spammer> list = new ArrayList<Spammer>();
+		try {
+			String nt = Spammer.NT_NAME, proName =  Spammer.P_STATUS;
+			QueryManager qm = getStorageHome().getSession().getWorkspace().getQueryManager();
+			Query q = qm.createQuery("SELECT "+proName+" FROM " + nt + " WHERE " + proName + " = '" + status +"'", Query.SQL);
+			NodeIterator it = q.execute().getNodes() ;
+			while (it.hasNext()) {
+				list.add(getSpamerProp(it.nextNode()));
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(" error listSpamerByStatus " +e.getMessage());
+		}
+		return list;
 	}
 }

@@ -9,7 +9,11 @@ public class Spammer {
 	public final static String P_DESCRIPTION= "exo:description";
 	public final static String P_STATUS = "exo:status";
 	public final static String P_SENDER = "exo:sender";
-	
+	public final static String ST_DEFAULT = "0";
+	public final static String ST_BLOCK = "1";
+	public final static String ST_PENDING = "2";
+	public final static String ST_ARCHIVE = "3";
+	public final static String[] STT = {ST_DEFAULT, ST_BLOCK, ST_PENDING, ST_ARCHIVE};
 	private String id;
 	private String email;
 	public String getId() {

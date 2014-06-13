@@ -23,14 +23,14 @@ import org.mailfilter.ui.portlet.MailfilterPortlet;
 public class UIContentViewer extends UIContainer {
   Collection<Spammer> list;
   public UIContentViewer() throws Exception {
-    addChild(UITest.class, null, null).setRendered(false) ;
+    addChild(UITest.class, null, null) ;
     refresh();
   }
 
   public void refresh(){
     DataStorage service = MailfilterPortlet.getDataService();
     try {
-      list = service.listSpamer();
+      list = service.listSpammer();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -42,9 +42,7 @@ public class UIContentViewer extends UIContainer {
     public void execute(Event<UIContentViewer> event) throws Exception {
       UIContentViewer view = event.getSource() ;
       MailfilterPortlet portlet = view.getAncestorOfType(MailfilterPortlet.class);
-      //UIPopupContainer uiPopupContainer = portlet.createUIComponent(UIPopupContainer.class, null, "formcontainer") ;
-      //UILessionForm uiLessionForm = uiPopupContainer.addChild(UILessionForm.class, null, null) ;
-      //portlet.addPopup(uiLessionForm, 600, 311);
+       
     }
   }
 }

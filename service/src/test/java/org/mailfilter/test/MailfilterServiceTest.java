@@ -1,4 +1,4 @@
- 
+
 package org.mailfilter.test;
 
 import java.util.ArrayList;
@@ -14,71 +14,112 @@ import org.mailfilter.service.storage.DataStorage;
 import org.mailfilter.service.storage.impl.JcrDataStorage;
 
 
- 
+
 public class MailfilterServiceTest extends BaseServiceTestCase {
 
-  private RepositoryService repositoryService_ ;
-  private DataStorage  storage_;
-  private static String   username = "root";
-  public Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
-  private OrganizationService organizationService_;
+	private RepositoryService repositoryService_ ;
+	private DataStorage  storage_;
+	private static String   username = "root";
+	public Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
+	private OrganizationService organizationService_;
 
-  public void setUp() throws Exception {
-    super.setUp();
-    repositoryService_ = getService(RepositoryService.class);
-    organizationService_ = (OrganizationService) getService(OrganizationService.class);
-    storage_ = getService(JcrDataStorage.class);
-  }
-  @Override
-  public void tearDown() throws Exception {
-	  super.tearDown();
-	 for(Spammer s : storage_.listSpamer()) storage_.removeSpammer(s);	 
-  }
+	public void setUp() throws Exception {
+		super.setUp();
+		repositoryService_ = getService(RepositoryService.class);
+		organizationService_ = (OrganizationService) getService(OrganizationService.class);
+		storage_ = getService(JcrDataStorage.class);
+	}
+	@Override
+	public void tearDown() throws Exception {
+		super.tearDown();
+		for(Spammer s : storage_.listSpammer()) storage_.removeSpammer(s);	 
+	}
 
-  private void loginUser(String userId) {
-    Identity identity = new Identity(userId, membershipEntries);
-    ConversationState state = new ConversationState(identity);
-    ConversationState.setCurrent(state);
-  }
-  //mvn test -Dtest=MailfilterServiceTest#testInitServices
-  public void testInitServices() throws Exception{
+	private void loginUser(String userId) {
+		Identity identity = new Identity(userId, membershipEntries);
+		ConversationState state = new ConversationState(identity);
+		ConversationState.setCurrent(state);
+	}
+	//mvn test -Dtest=MailfilterServiceTest#testInitServices
+	public void testInitServices() throws Exception{
 
-    assertNotNull(repositoryService_) ;
-    assertEquals(repositoryService_.getDefaultRepository().getConfiguration().getName(), "repository");
-    assertEquals(repositoryService_.getDefaultRepository().getConfiguration().getDefaultWorkspaceName(), "portal-test");
-    assertNotNull(organizationService_) ;
+		assertNotNull(repositoryService_) ;
+		assertEquals(repositoryService_.getDefaultRepository().getConfiguration().getName(), "repository");
+		assertEquals(repositoryService_.getDefaultRepository().getConfiguration().getDefaultWorkspaceName(), "portal-test");
+		assertNotNull(organizationService_) ;
 
-    //assertEquals(organizationService_.getUserHandler().findAllUsers().getSize(), 8);
+		//assertEquals(organizationService_.getUserHandler().findAllUsers().getSize(), 8);
 
-    assertNotNull(storage_);
+		assertNotNull(storage_);
 
-  }
-  
+	}
 
-  
-  //mvn test -Dtest=MailfilterServiceTest#testAddSpamer
-  public void testAddSpamer() throws Exception {
-	  Spammer s = new Spammer();
-	  s.setEmail("phamtuanchip@mail.com");
-	  assertNotNull(storage_.addSpammer(s));
-  }
-  
-//mvn test -Dtest=MailfilterServiceTest#testListSpamer
-  public void testListSpamer() throws Exception {
-	  Spammer s = new Spammer();
-	  s.setEmail("phamtuanchip@mail.com");
-	  assertNotNull(storage_.addSpammer(s));
-	  assertEquals(1, storage_.listSpamer().size());
-  }
-  
-//mvn test -Dtest=MailfilterServiceTest#testRemoveSpamer
-  public void testRemoveSpamer() throws Exception {
-	  Spammer s = new Spammer();
-	  s.setEmail("phamtuanchip@mail.com");
-	  assertNotNull(storage_.addSpammer(s));
-	  assertEquals(1, storage_.listSpamer().size());
-	  storage_.removeSpammer(s);
-	  assertEquals(0, storage_.listSpamer().size());
-  }
-  
+	private Spammer createSpamer(String email, String sender, String status, String des) {
+		Spammer s = new Spammer();
+		s.setEmail(email);
+		s.setDescription(des);
+		s.setSender(sender);
+		s.setStatus(status);
+		return s;
+	}
+
+	//mvn test -Dtest=MailfilterServiceTest#testAddSpamer
+	public void testAddSpamer() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+	}
+
+	//mvn test -Dtest=MailfilterServiceTest#testGetSpamerById
+	public void testGetSpamerById() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+
+		assertNotNull(storage_.getSpammerById(s.getId()));
+	}
+
+	//mvn test -Dtest=MailfilterServiceTest#testUpdateSpammer
+	public void testUpdateSpammer() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+		s.setEmail("phamtuanchip@yahoo.com");
+		storage_.updateSpammer(s);
+		assertEquals("phamtuanchip@yahoo.com", storage_.getSpammerById(s.getId()).getEmail());
+
+	}
+
+
+	//mvn test -Dtest=MailfilterServiceTest#testListSpamer
+	public void testListSpamer() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+		assertEquals(1, storage_.listSpammer().size());
+	}
+
+	//mvn test -Dtest=MailfilterServiceTest#testRemoveSpamer
+	public void testRemoveSpamer() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+		assertEquals(1, storage_.listSpammer().size());
+		storage_.removeSpammer(s);
+		assertEquals(0, storage_.listSpammer().size());
+	}
+
+	//mvn test -Dtest=MailfilterServiceTest#testListSpammerByStatus
+	public void testListSpammerByStatus() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+		assertEquals(1, storage_.listSpammerByStatus("1").size());
+
+		s = createSpamer("phamtuanchip@mail.com", "mail.com", "2", "description");
+		assertNotNull(storage_.addSpammer(s));
+		assertEquals(1, storage_.listSpammerByStatus("2").size());
+
+		s = createSpamer("phamtuanchip@mail.com", "mail.com", "3", "description");
+		assertNotNull(storage_.addSpammer(s));
+		assertEquals(1, storage_.listSpammerByStatus("3").size());
+
+		assertEquals(3, storage_.listSpammer().size());
+
+	}
+
 }
