@@ -1,8 +1,14 @@
 package org.mailfilter.service.model;
 
+import java.io.Serializable;
+
 import org.exoplatform.services.jcr.util.IdGenerator;
 
-public class Spammer {
+public class Spammer implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4521719601188655634L;
 	public final static String PREF = "espamer";
 	public final static String NT_NAME = "exo:spamer";
 	public final static String P_MAIL = "exo:email";

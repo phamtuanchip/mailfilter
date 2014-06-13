@@ -22,6 +22,7 @@
         <module>webui</module>
         <module>extension</module>
         <module>resources</module>
+		<module>webservice</module>
 		<module>packaging</module>
     </modules>
     <scm>

@@ -20,7 +20,10 @@
       <groupId>org.mailfilter</groupId>
       <artifactId>mailfilter-service</artifactId>
     </dependency>
-     
+     <dependency>
+      <groupId>org.mailfilter</groupId>
+      <artifactId>mailfilter-webservice</artifactId>
+    </dependency>
       <dependency>
           <?rename mailfilterResources.war?>
           <groupId>org.mailfilter</groupId>

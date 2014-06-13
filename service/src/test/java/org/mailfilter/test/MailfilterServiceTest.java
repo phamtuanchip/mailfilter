@@ -122,4 +122,23 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 
 	}
 
+	//mvn test -Dtest=MailfilterServiceTest#testSearchSpammerByEmail
+		public void testSearchSpammerByEmail() throws Exception {
+			Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+			assertNotNull(storage_.addSpammer(s));
+			 
+			s = createSpamer("phamtuanchip@mail.com", "gmail.com", "2", "description");
+			assertNotNull(storage_.addSpammer(s));
+			 
+
+			s = createSpamer("phamtuanchip@mail.com", "hotmail.com", "3", "description");
+			assertNotNull(storage_.addSpammer(s));
+			 
+
+			assertEquals(3, storage_.listSpammer().size());
+			
+			assertEquals(1, storage_.searchSpammerByEmail("phamtuanchip@hotmail.com").size());
+
+		}
+
 }

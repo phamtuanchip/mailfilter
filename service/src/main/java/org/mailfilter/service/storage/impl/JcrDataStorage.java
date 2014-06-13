@@ -302,4 +302,29 @@ public class JcrDataStorage implements DataStorage {
 		}
 		return list;
 	}
+
+
+
+
+
+	@Override
+	public Collection<Spammer> searchSpammerByEmail(String email)
+			throws Exception {
+		Collection<Spammer> list = new ArrayList<Spammer>();
+		try {
+			String domain = email.split("@")[1];
+			String nt = Spammer.NT_NAME, proName =  Spammer.P_SENDER;
+			QueryManager qm = getStorageHome().getSession().getWorkspace().getQueryManager();
+			Query q = qm.createQuery("SELECT "+proName+" FROM " + nt + " WHERE " + proName + " LIKE '%" + domain +"%'", Query.SQL);
+			NodeIterator it = q.execute().getNodes() ;
+			while (it.hasNext()) {
+				list.add(getSpamerProp(it.nextNode()));
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(" error listSpamerByStatus " +e.getMessage());
+		}
+		return list;
+	}
 }

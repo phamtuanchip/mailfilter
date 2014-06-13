@@ -22,7 +22,7 @@ public interface DataStorage {
   public Spammer addSpammer(Spammer s) throws Exception;
   public Collection<Spammer> updateSpammers(Collection<Spammer> list) throws Exception;
   public Collection<Spammer> addSpammers(Collection<Spammer> list) throws Exception;
-  
+  public Collection<Spammer> searchSpammerByEmail(String email) throws Exception;
   
   
   

@@ -1,0 +1,33 @@
+
+<nodeTypes xmlns:nt="ht exo://www.jcp.org/jcr/nt/1.0" 
+           xmlns:mix="ht exo://www.jcp.org/jcr/mix/1.0" 
+           xmlns:jcr="ht exo://www.jcp.org/jcr/1.0">
+
+  
+  <!-- email filter nt definition -->
+   <nodeType name="exo:spamer" isMixin="false" hasOrderableChildNodes="false">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      
+      <propertyDefinition name="exo:email" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+
+       <propertyDefinition name="exo:description" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      
+      <propertyDefinition name="exo:status" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      
+      <propertyDefinition name="exo:sender" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+    
+  </nodeType>
+</nodeTypes>
