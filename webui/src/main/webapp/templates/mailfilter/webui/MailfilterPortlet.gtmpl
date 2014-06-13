@@ -14,7 +14,7 @@ import org.mailfilter.ui.view.UIContentViewer;
     e.printStackTrace();
   }
 %>
-<div id="EStudyPortlet" class="EStudyPortlet border-radius">
+<div id="MailfilterPortlet" class="MailfilterPortlet border-radius">
 <div class="container">
 
 <div class="row">

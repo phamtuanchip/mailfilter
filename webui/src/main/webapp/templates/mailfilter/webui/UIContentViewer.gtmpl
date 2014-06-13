@@ -8,7 +8,7 @@
     def rcontext = _ctx.getRequestContext() ;
     def requireJS = rcontext.getJavascriptManager().getRequireJS();
     //requireJS.require("SHARED/mailfilterResources","erjs");
-    //requireJS.addScripts('erjs.estudyResources.init();') ;
+    //requireJS.addScripts('erjs.mailfilterResources.init();') ;
     } catch (Exception e) {
     e.printStackTrace();
     }

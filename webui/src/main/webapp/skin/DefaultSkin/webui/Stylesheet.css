@@ -3,20 +3,20 @@
 
 
 
-.EStudyPortlet {
+.MailfilterPortlet {
   padding-right:10px;
   padding-bottom: 10px
     
 }
-.EStudyPortlet .container {
+.MailfilterPortlet .container {
 	width:inherit;
 }
 
-.EStudyPortlet .row {
+.MailfilterPortlet .row {
 	padding: 0;
     display: flex;
 }
-.EStudyPortlet .border-radius {
+.MailfilterPortlet .border-radius {
     border: 1px solid #dddddd;
     #overflow: hidden;
     background: white;
@@ -26,7 +26,7 @@
     margin: 15px 0 0 15px;
     padding: 5px 0 15px;
 }
- .EStudyPortlet .border-no-radius {
+ .MailfilterPortlet .border-no-radius {
     
     
     background: white;
@@ -36,12 +36,12 @@
     margin: 10px 0 0 15px;
     padding: 5px 0 15px;
 }
-.EStudyPortlet .UILessonList {
+.MailfilterPortlet .UILessonList {
      
 }
 
 
-.EStudyPortlet .UIContentViewer {
+.MailfilterPortlet .UIContentViewer {
  
      
 
@@ -49,7 +49,7 @@
 
 
 
-.EStudyPortlet .UITest {
+.MailfilterPortlet .UITest {
 
     
 

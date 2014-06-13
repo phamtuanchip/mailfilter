@@ -30,6 +30,7 @@ import org.exoplatform.services.listener.Listener;
  */
 public class SampleContextDestroyedListener extends Listener<PortalContainer, ServletContextEvent> {
 
+	
     @Override
     public void onEvent(Event<PortalContainer, ServletContextEvent> event) throws Exception {
         System.out.println("Destroying the context of the 'sample-ext'");
