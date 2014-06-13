@@ -4,9 +4,9 @@
                   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
     <module>
-        <name>estudyResources</name>
+        <name>mailfilterResources</name>
         <script>
-            <path>/javascript/estudyResources.js</path>
+            <path>/javascript/mailfilterResources.js</path>
         </script>
         <depends>
             <module>jquery</module>

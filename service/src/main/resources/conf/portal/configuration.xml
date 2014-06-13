@@ -3,10 +3,10 @@
   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 		 
 	 
-	<!-- Estudy -->
+	<!-- mailfilter -->
   <component>
-    <key>org.estudy.learning.storage.DataStorage</key>
-    <type>org.estudy.learning.storage.impl.JcrDataStorage</type>
+    <key>org.mailfilter.service.storage.DataStorage</key>
+    <type>org.mailfilter.service.storage.impl.JcrDataStorage</type>
   </component>
 	
 	<component>
@@ -116,14 +116,14 @@
 	<external-component-plugins>
       <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>      
       <component-plugin> 
-        <name>add.ks.nodeType</name>
+        <name>add.nodeType</name>
         <set-method>addPlugin</set-method>
         <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
         <init-params>
           <values-param>
             <name>autoCreatedInNewRepository</name>
             <description>Node types configuration file</description>
-            <value>jar:/conf/portal/estudy-nodetypes.xml</value>
+            <value>jar:/conf/portal/nodetypes.xml</value>
           </values-param>
         </init-params>
       </component-plugin>

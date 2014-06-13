@@ -6,11 +6,11 @@
     <description xml:lang="EN">Email filter system</description>
     <portlet-name>mailfilter</portlet-name>
     <display-name xml:lang="EN">Email filter</display-name>
-    <portlet-class>org.estudy.ui.portlet.CaptchaController</portlet-class>    
+    <portlet-class>org.mailfilter.ui.portlet.CaptchaController</portlet-class>    
     
     <init-param>
       <name>webui.configuration</name>
-      <value>/WEB-INF/conf/portlet/EstudyPortlet/webui/configuration.xml</value>
+      <value>/WEB-INF/conf/portlet/webui/configuration.xml</value>
     </init-param>
     <init-param>
       <name>width</name>
@@ -27,7 +27,7 @@
       <portlet-mode>help</portlet-mode>
     </supports>
     <supported-locale>en</supported-locale>
-    <resource-bundle>locale.portlet.estudy.EstudyPortlet</resource-bundle>
+    <resource-bundle>locale.portlet.mailfilter.MailfilterPortlet</resource-bundle>
     <portlet-info>
       <title>Email filter </title>
       <short-title>Email filter</short-title>

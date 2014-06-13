@@ -1,0 +1,29 @@
+<%
+
+    import org.mailfilter.ui.view.UITest;
+	import org.mailfilter.ui.view.UIResourceViewer;
+    import org.mailfilter.learning.model.Attachment;
+
+    try {
+    def rcontext = _ctx.getRequestContext() ;
+    def requireJS = rcontext.getJavascriptManager().getRequireJS();
+    //requireJS.require("SHARED/mailfilterResources","erjs");
+    //requireJS.addScripts('erjs.estudyResources.init();') ;
+    } catch (Exception e) {
+    e.printStackTrace();
+    }
+
+%>
+<div id="UIContentViewer" class="UIContentViewer">
+
+    <%
+    	 
+        if(uicomponent.getChild(UITest.class).isRendered()){
+        uicomponent.renderChild(UITest.class);
+        }  
+    	if(uicomponent.getChild(UIResourceViewer.class).isRendered()){
+        uicomponent.renderChild(UIResourceViewer.class);
+        }  
+     %>
+ 
+</div>

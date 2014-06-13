@@ -31,8 +31,8 @@
  
       <node>
           <name>mailfilterPage</name>
-          <label>#{portal.classic.learningPage}</label>
-          <page-reference>portal::classic::learning</page-reference>
+          <label>#{portal.classic.mailfilterPage}</label>
+          <page-reference>portal::classic::mailfilter</page-reference>
       </node>
     <node>
       <name>groupnavigation</name>

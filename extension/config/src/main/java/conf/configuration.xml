@@ -82,17 +82,13 @@
                 <value>
                   <string>web</string>
                 </value>
+                
                   <value>
-                      <string>welcome</string>
+                      <string>mailfilter</string>
                   </value>
-                  <value>
-                      <string>estudy</string>
-                  </value>
-                <!--<value profiles="jboss">
-                   <string>gatein-wsrp-integration</string>
-                </value>-->
+                
                 <value>
-                  <string>estudyExtension</string>
+                  <string>mailfilterExtension</string>
                 </value>
               </collection>
             </field>

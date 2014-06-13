@@ -1,0 +1,40 @@
+<%
+import org.mailfilter.ui.popup.UIPopupAction;
+import org.mailfilter.ui.view.UILessonList;
+import org.mailfilter.ui.view.UIContentViewer;
+ 
+  try {
+	  def rcontext = _ctx.getRequestContext() ;
+	  def requireJS = rcontext.getJavascriptManager().getRequireJS();
+	  requireJS.require("PORTLET/mailfilter/mailfilter","ejs");
+	  requireJS.require("SHARED/bootstrap","bootstrap");
+  
+  requireJS.addScripts('ejs.mailfilter.init();') ;  
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+%>
+<div id="EStudyPortlet" class="EStudyPortlet border-radius">
+<div class="container">
+
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 border-no-radius">
+<%
+    uicomponent.renderChild(UILessonList.class);
+%>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-9 col-lg-9 border-radius">
+<%
+    
+    uicomponent.renderChild(UIContentViewer.class);
+    
+%>
+</div>
+
+</div>
+</div>
+
+<%
+    uicomponent.renderChild(UIPopupAction.class) ;
+%>
+</div>

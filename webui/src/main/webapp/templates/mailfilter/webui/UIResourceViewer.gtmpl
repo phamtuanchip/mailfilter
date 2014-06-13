@@ -1,0 +1,81 @@
+<%  
+   import org.mailfilter.learning.model.Attachment;
+	import org.mailfilter.learning.Util;
+
+    try {
+    def rcontext = _ctx.getRequestContext() ;
+    def requireJS = rcontext.getJavascriptManager().getRequireJS();
+    //requireJS.require("SHARED/mailfilterResources","erjs");
+    //requireJS.addScripts('erjs.mailfilterResources.init();') ;
+    } catch (Exception e) {
+    e.printStackTrace();
+    }
+
+%>
+<div id="UIResourceViewer" class="UIResourceViewer">
+<div class="alert alert-block">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>Warning!</h4>
+  Best check yo self, you're not...
+</div>
+<div class="container">
+
+
+
+    <%
+         
+
+        for( int i = 0; i < uicomponent.getMediaList().size(); i++)  {
+		 
+			 
+			 Attachment att = uicomponent.getMediaList().get(i);
+			 
+    %>
+	
+
+     
+	<%
+		def id = att.getId().substring(att.getId().lastIndexOf(Util.SLASH) + 1);
+		if(att.getMimeType().contains("image")){
+		
+		def url = uicomponent.getResourceUrl(att, "thumbnail", 100, 100);
+		def urlfull = uicomponent.getResourceUrl(att, "full", 0, 0);
+		uicomponent.selectedFullUrl_ = urlfull;
+		
+		%>
+		 
+			<a href="$urlfull" class="thumbnail">
+			  <img src="$url" data-src="holder.js/300x200" alt="">
+			</a>
+		  
+
+		<%
+		} else if(att.getMimeType().contains("audio")) {
+			def webdavurl = uicomponent.getWebDavUrl(att);
+			uicomponent.selectedWebdavUrl_ = webdavurl;
+			uicomponent.mimeType_ = "audio";
+			_ctx.include("app:/templates/mailfilter/webui/VideoAudioViewer.gtmpl");
+		} else if(att.getMimeType().contains("video")) {
+			def webdavurl = uicomponent.getWebDavUrl(att);
+			uicomponent.selectedWebdavUrl_ = webdavurl;
+			uicomponent.mimeType_ = "video";
+			_ctx.include("app:/templates/mailfilter/webui/VideoAudioViewer.gtmpl");
+		//} else if(att.getMimeType().contains("pdf")) {
+		//	def webdavurl = uicomponent.getWebDavUrl(att);
+		//	uicomponent.selectedWebdavUrl_ = webdavurl;
+		//	_ctx.include("app:/templates/mailfilter/webui/PDFJSViewer.gtmpl");
+		}
+	%>
+	<a id="$att.resourceId" href="<%=att.getDataPath()%>" onclick="<%=uicomponent.event("Download")%>"  rel="tooltip" data-placement="bottom" title="$att.name">
+                <i>$att.name</i>
+     </a>
+    
+   
+    <%    
+        
+	    }
+    %>
+ </div>
+</div>
+   
+</div>
