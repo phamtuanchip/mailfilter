@@ -2,7 +2,7 @@
 
     import org.mailfilter.ui.view.UITest;
 	import org.mailfilter.ui.view.UIResourceViewer;
-    import org.mailfilter.learning.model.Attachment;
+    import org.mailfilter.service.model.Attachment;
 
     try {
     def rcontext = _ctx.getRequestContext() ;
