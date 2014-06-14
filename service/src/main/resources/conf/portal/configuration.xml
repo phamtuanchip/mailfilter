@@ -7,6 +7,12 @@
   <component>
     <key>org.mailfilter.service.storage.DataStorage</key>
     <type>org.mailfilter.service.storage.impl.JcrDataStorage</type>
+     <init-params>
+      <properties-param>
+        <name>default.server.bannned</name>
+        <property name="name" value="altavista.com,dynamitemail.com,horrormail.com,pochta.ru,web-police.com"/>         
+      </properties-param>
+    </init-params>
   </component>
 	
 	<component>

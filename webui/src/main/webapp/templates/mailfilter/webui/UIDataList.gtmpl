@@ -1,13 +1,23 @@
 <%
-import org.mailfilter.service.model.Spammer;
+ import org.mailfilter.service.model.Spammer;
 %>
 
 <div id="<%=uicomponent.getId()%>" class="UILessonList">
-<div class="list-group">
+    <div class="panel panel-primary">
+		<div class="panel-heading">
+			 <input id='DataListSearch' type="text" class="form-control" placeholder="Search">
+		</div>
+        <div class="panel-body">
+   			<ul id='DataListSearchResult' >
+				 
+			</ul>
+		</div>
+	</div>	
+	<div class="list-group">
  			<h3 class="panel-title">
-            <a href="#" class="list-group-item active"> 
-             Management
-			</a>
+				<a href="#" class="list-group-item active"> 
+				 Management
+				</a>
 			</h3>
             <a class="list-group-item" href="#" onclick="<%=uicomponent.event("AddSpammer")%>"    rel="tooltip" data-placement="bottom" title="add new spammer">
                 <i>Add Spammer</i>
@@ -26,25 +36,5 @@ import org.mailfilter.service.model.Spammer;
            <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListArchive")%>"   rel="tooltip" data-placement="bottom" title="list all archive spammer">
                 <i>Archived</i>
             </a>  
-         
-   
-</div>
-
- <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">new spamer detected</h3>
-            </div>
-            <div class="panel-body">
-               
-
-    <ul>
-    <% 
-    	for (Spammer e : uicomponent.getList()) {
-    %>
-        <li class="toctree-l2"><a class="reference internal" href="#">$e.email</a></li>
-       
-    <% } %>
-    </ul>
-	</div>
 	</div>
 </div>

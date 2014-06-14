@@ -53,6 +53,7 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 		assertNotNull(storage_);
 
 	}
+	
 
 	private Spammer createSpamer(String email, String sender, String status, String des) {
 		Spammer s = new Spammer();
@@ -62,6 +63,14 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 		s.setStatus(status);
 		return s;
 	}
+	
+
+	//mvn test -Dtest=MailfilterServiceTest#testDefaultInitliliazeSpamer
+	public void testDefaultInitliliazeSpamer() throws Exception {
+		if(storage_.listSpammer().size()>0)
+		 assertEquals(5, storage_.listSpammer().size());
+	}
+
 
 	//mvn test -Dtest=MailfilterServiceTest#testAddSpamer
 	public void testAddSpamer() throws Exception {

@@ -7,51 +7,46 @@ import org.mailfilter.service.model.Spammer;
   <!-- Default panel contents -->
   <div class="panel-heading">Panel heading</div>
 
-  <!-- Table -->
-  <table class="table">
-   
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Domain</th>
-            <th>Email</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-         <% 
-         	int counter = 1;
-    		for (Spammer e : uicomponent.getList()) {
-   		 %>
-       		<tr>
-            <td>$counter</td>
-            <td><%=(e.getSender()==null?"&nbsp;":e.getSender())%></td>
-            <td>$e.email</td>
-            <td><%=(e.getDescription()==null?"&nbsp;":e.getDescription())%></td>
-            <td>
-            <a  href="#" onclick="<%=uicomponent.event("Edit", e.getId())%>"   rel="tooltip" data-placement="bottom" title="Edit spammer">
-                <i>Edit</i>
-            </a>  
-            |
-            <a  href="#" onclick="<%=uicomponent.event("Remove", e.getId())%>"   rel="tooltip" data-placement="bottom" title="Edit spammer">
-                <i>Remove</i>
-            </a>  
-            </td>
-          </tr>
-    	<% 
-    	 counter ++;	
-    	 } 
-    	%>
-          
-        </tbody>
-      
-  </table>
-</div>
- <span class="badge">1</span>
- <ul class="pager">
-  <li><a href="#">Previous</a></li>
-  <li><a href="#">Next</a></li>
-</ul>
-
+	  <!-- Table -->
+	  <table class="table">
+	   
+	        <thead>
+	          <tr>
+	            <th>#</th>
+	            <th>Domain</th>
+	            <th>Email</th>
+	            <th>Description</th>
+	            <th>Actions</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	         <% 
+	         	int counter = 1;
+	    		for (Spammer e : uicomponent.getList()) {
+	   		 %>
+	       		<tr>
+	            <td>$counter</td>
+	            <td><%=(e.getSender()==null?"&nbsp;":e.getSender())%></td>
+	            <td>$e.email</td>
+	            <td><%=(e.getDescription()==null?"&nbsp;":e.getDescription())%></td>
+	            <td>
+	            <a  href="#" onclick="<%=uicomponent.event("Edit", e.getId())%>"   rel="tooltip" data-placement="bottom" title="Edit spammer">
+	                <i>Edit</i>
+	            </a>  
+	            |
+	            <a  href="#" onclick="<%=uicomponent.event("Remove", e.getId())%>"   rel="tooltip" data-placement="bottom" title="Edit spammer">
+	                <i>Remove</i>
+	            </a>  
+	            </td>
+	          </tr>
+	    	<% 
+	    	 counter ++;	
+	    	 } 
+	    	%>
+	          
+	        </tbody>
+	      
+	  </table>
+  </div>
+ 
 </div>

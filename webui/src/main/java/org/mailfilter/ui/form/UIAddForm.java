@@ -43,8 +43,7 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 	
 	public UIAddForm() throws Exception {
 		addChild(new UIFormStringInput("domain", "domain", "").addValidator(MandatoryValidator.class));
-		//addChild(new UIFormStringInput("rule", "rule", "*"));
-		addChild(new UIFormStringInput("email", "email", "").addValidator(EmailAddressValidator.class)) ;
+		addChild(new UIFormStringInput("email", "email", "")) ;
 		List<SelectItemOption<String>> types = new ArrayList<SelectItemOption<String>>() ;
 		for(String stt : Spammer.STT){
 			types.add(new SelectItemOption<String>(stt,stt)) ;

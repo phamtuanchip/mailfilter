@@ -12,7 +12,7 @@
     </supertypes>
     <propertyDefinitions>
       
-      <propertyDefinition name="exo:email" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="exo:email" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
 
@@ -24,7 +24,7 @@
         <valueConstraints/>
       </propertyDefinition>
       
-      <propertyDefinition name="exo:sender" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="exo:sender" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>

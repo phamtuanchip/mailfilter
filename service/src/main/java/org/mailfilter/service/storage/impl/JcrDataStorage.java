@@ -16,8 +16,10 @@ import javax.jcr.Value;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 
+import org.exoplatform.commons.utils.ExoProperties;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -33,11 +35,31 @@ public class JcrDataStorage implements DataStorage {
 	private RepositoryService repoService_;
 	private SessionProviderService sessionProviderService_;
 	private static final Log       log                 = ExoLogger.getLogger("JcrDataStorage.class");
-	public JcrDataStorage(NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService){
+	public JcrDataStorage(InitParams params, NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService){
 		nodeHierarchyCreator_ = nodeHierarchyCreator;
 		repoService_ = repoService;
 		ExoContainer container = ExoContainerContext.getCurrentContainer();
 		sessionProviderService_ = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
+		if(params != null && params.getPropertiesParam("default.server.bannned") != null){
+			ExoProperties props = params.getPropertiesParam("default.server.bannned").getProperties();
+			String list = props.getProperty("name");
+			try {
+				if(list != null && list.split(",").length > 0){
+					for (String name : list.split(",") ) {
+						Spammer s = new Spammer();
+						s.setSender(name);
+						s.setEmail("*.*");
+						s.setDescription("block andy email from this donmain: " + name);
+						s.setStatus(Spammer.ST_BLOCK);
+						addSpammer(s);
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				log.error("Error init data base " + e.getMessage());
+			}
+		}
 	}
 
 
