@@ -5,7 +5,7 @@
 <div id="<%=uicomponent.getId()%>" class="UILessonList">
     <div class="panel panel-primary">
 		<div class="panel-heading">
-			 <input id='DataListSearch' type="text" link="<%=uicomponent.getLink()%>" class="form-control" placeholder="Check email">
+			 <input id='DataListSearch' type="text" link="<%=uicomponent.getLink()%>" class="form-control" placeholder="<%=_ctx.appRes('UIDataList.label.check')%>">
 		</div>
         <div class="panel-body">
    			<ul id='DataListSearchResult' >
@@ -21,22 +21,22 @@
 				 Management
 				</a>
 			</h3>
-            <a class="list-group-item" href="#" onclick="<%=uicomponent.event("AddSpammer")%>"    rel="tooltip" data-placement="bottom" title="add new spammer">
-                <i>Add Spammer</i>
+            <a class="list-group-item" href="#" onclick="<%=uicomponent.event("AddSpammer")%>"    rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes('UIDataList.label.addSpammer')%>">
+                <i><%=_ctx.appRes('UIDataList.label.addSpammer')%></i>
             </a>
-             <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListAll")%>"  rel="tooltip" data-placement="bottom" title="All">
-                <i>All</i>
+             <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListAll")%>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes('UIDataList.label.listAll')%>">
+                <i><%=_ctx.appRes('UIDataList.label.listAll')%></i>
             </a>
          
-            <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListPending")%>" rel="tooltip" data-placement="bottom" title="List all pending spammer">
-                <i>Pending</i>
+            <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListPending")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes('UIDataList.label.listPending')%>">
+                <i><%=_ctx.appRes('UIDataList.label.listPending')%></i>
             </a>
-			 <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListBlocked")%>"   rel="tooltip" data-placement="bottom" title="list all blocked spammer">
-                <i>Blocked</i>
+			 <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListBlocked")%>"   rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes('UIDataList.label.allBlocked')%>">
+                <i><%=_ctx.appRes('UIDataList.label.allBlocked')%></i>
             </a>  
              
-           <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListArchive")%>"   rel="tooltip" data-placement="bottom" title="list all archive spammer">
-                <i>Archived</i>
+           <a class="list-group-item" href="#" onclick="<%=uicomponent.event("ListArchive")%>"   rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes('UIDataList.label.listArchved')%>">
+                <i><%=_ctx.appRes('UIDataList.label.listArchved')%></i>
             </a>  
 	</div>
 </div>

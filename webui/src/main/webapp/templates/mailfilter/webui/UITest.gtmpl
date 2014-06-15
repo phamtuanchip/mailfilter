@@ -5,7 +5,7 @@ import org.mailfilter.service.model.Spammer;
 <div id="<%=uicomponent.getId()%>" class="UITest">
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Panel heading</div>
+  <div class="panel-heading"></div>
 
 	  <!-- Table -->
 	  <table class="table">
@@ -13,10 +13,10 @@ import org.mailfilter.service.model.Spammer;
 	        <thead>
 	          <tr>
 	            <th>#</th>
-	            <th>Domain</th>
-	            <th>Email</th>
-	            <th>Description</th>
-	            <th>Actions</th>
+	            <th><%=_ctx.appRes('UITest.label.domain')%></th>
+	            <th><%=_ctx.appRes('UITest.label.email')%></th>
+	            <th><%=_ctx.appRes('UITest.label.description')%></th>
+	            <th><%=_ctx.appRes('UITest.label.action')%></th>
 	          </tr>
 	        </thead>
 	        <tbody>
@@ -27,15 +27,15 @@ import org.mailfilter.service.model.Spammer;
 	       		<tr>
 	            <td>$counter</td>
 	            <td><%=(e.getSender()==null?"&nbsp;":e.getSender())%></td>
-	            <td>$e.email</td>
+	            <td><%=(e.getEmail()==null?"&nbsp;":e.getEmail())%></td>
 	            <td><%=(e.getDescription()==null?"&nbsp;":e.getDescription())%></td>
 	            <td>
-	            <a  href="#" onclick="<%=uicomponent.event("Edit", e.getId())%>"   rel="tooltip" data-placement="bottom" title="Edit spammer">
-	                <i>Edit</i>
+	            <a  href="#" onclick="<%=uicomponent.event("Edit", e.getId())%>"   rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes('UITest.label.action.edit')%>">
+	                <i><%=_ctx.appRes('UITest.label.action.edit')%></i>
 	            </a>  
 	            |
-	            <a  href="#" onclick="<%=uicomponent.event("Remove", e.getId())%>"   rel="tooltip" data-placement="bottom" title="Edit spammer">
-	                <i>Remove</i>
+	            <a  href="#" onclick="<%=uicomponent.event("Remove", e.getId())%>"   rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes('UITest.label.action.remove')%>">
+	                <i><%=_ctx.appRes('UITest.label.action.remove')%></i>
 	            </a>  
 	            </td>
 	          </tr>

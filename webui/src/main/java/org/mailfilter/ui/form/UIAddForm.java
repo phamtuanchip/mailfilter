@@ -18,13 +18,12 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
-import org.exoplatform.webui.form.validator.EmailAddressValidator;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.mailfilter.service.model.Spammer;
+import org.mailfilter.ui.core.DomainNameValidator;
 import org.mailfilter.ui.popup.UIPopupComponent;
 import org.mailfilter.ui.portlet.MailfilterPortlet;
 import org.mailfilter.ui.view.UIContentViewer;
-import org.mailfilter.ui.view.UIDataList;
 import org.mailfilter.ui.view.UITest;
 @ComponentConfig(
 		lifecycle = UIFormLifecycle.class,
@@ -46,7 +45,7 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 	
 	public UIAddForm() throws Exception {
 		addChild(new UIFormStringInput("domain", "domain", "").addValidator(MandatoryValidator.class));
-		addChild(new UIFormStringInput("email", "email", "")) ;
+		addChild(new UIFormTextAreaInput("email", "email", "")) ;
 		List<SelectItemOption<String>> types = new ArrayList<SelectItemOption<String>>() ;
 		for(String stt : Spammer.STT){
 			types.add(new SelectItemOption<String>(stt,stt)) ;
@@ -59,13 +58,11 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 
 	@Override
 	public void activate() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void deActivate() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -79,18 +76,21 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 		@Override
 		public void execute(Event<UIAddForm> event) throws Exception {
 			UIAddForm uiForm = event.getSource() ;
+			String domain = uiForm.getUIStringInput("domain").getValue();
+			if(!new DomainNameValidator().validate(domain)) {
+				MailfilterPortlet.showMessage("UIAddForm.msg.domain-invalid", ApplicationMessage.ERROR, null);
+				return;
+			}
 			Spammer es = new Spammer();
 			es.setEmail( 
-					uiForm.getUIStringInput("email").getValue());
+					uiForm.getUIFormTextAreaInput("email").getValue());
 			es.setStatus(uiForm.getUIFormSelectBox("status").getValue());
 			es.setDescription(uiForm.getUIFormTextAreaInput("description").getValue());
-			es.setSender(uiForm.getUIStringInput("domain").getValue());
+			es.setSender(domain);
 			try {
 			MailfilterPortlet.getDataService().addSpammer(es);
 			} catch (ItemExistsException ie) {
-				String domain = es.getSender();
-				if(domain.split(".").length > 0) domain = domain.split(".")[0];
-				MailfilterPortlet.showMessage("UIAddForm.msg.item-exist", ApplicationMessage.WARNING, new Object[]{domain});
+				MailfilterPortlet.showMessage("UIAddForm.msg.item-exist", ApplicationMessage.WARNING, null);
 				return;
 			}
 			MailfilterPortlet portlet = uiForm.getAncestorOfType(MailfilterPortlet.class) ;
@@ -141,7 +141,7 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 	}
 	public void init(Spammer s) {
 		this.spammerId = s.getId();
-		getUIStringInput("email").setValue(s.getEmail());
+		getUIFormTextAreaInput("email").setValue(s.getEmail());
 		getUIStringInput("domain").setValue(s.getSender());
 		getUIFormTextAreaInput("description").setValue(s.getDescription());
 		getUIFormSelectBox("status").setValue(s.getStatus());

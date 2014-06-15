@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.jcr.ItemNotFoundException;
 
-import org.apache.james.mime4j.dom.field.MailboxField;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -71,9 +70,6 @@ public class UITest extends UIContainer {
 		public void execute(Event<UITest> event) throws Exception {
 			UITest testview = event.getSource() ;
 			MailfilterPortlet portlet = testview.getAncestorOfType(MailfilterPortlet.class);
-			//UIPopupContainer uiPopupContainer = portlet.createUIComponent(UIPopupContainer.class, null, "formcontainer") ;
-			//UILessionForm uiLessionForm = uiPopupContainer.addChild(UILessionForm.class, null, null) ;
-			//portlet.addPopup(uiLessionForm, 600, 311);
 		}
 	}
 
@@ -82,9 +78,6 @@ public class UITest extends UIContainer {
 		public void execute(Event<UITest> event) throws Exception {
 			UITest testview = event.getSource() ;
 			MailfilterPortlet portlet = testview.getAncestorOfType(MailfilterPortlet.class);
-			//UIPopupContainer uiPopupContainer = portlet.createUIComponent(UIPopupContainer.class, null, "formcontainer") ;
-			//UILessionForm uiLessionForm = uiPopupContainer.addChild(UILessionForm.class, null, null) ;
-			//portlet.addPopup(uiLessionForm, 600, 311);
 		}
 	}
 
@@ -93,9 +86,6 @@ public class UITest extends UIContainer {
 		public void execute(Event<UITest> event) throws Exception {
 			UITest testview = event.getSource() ;
 			MailfilterPortlet portlet = testview.getAncestorOfType(MailfilterPortlet.class);
-			//UIPopupContainer uiPopupContainer = portlet.createUIComponent(UIPopupContainer.class, null, "formcontainer") ;
-			//UILessionForm uiLessionForm = uiPopupContainer.addChild(UILessionForm.class, null, null) ;
-			//portlet.addPopup(uiLessionForm, 600, 311);
 		}
 	}
 	static public class EditActionListener extends EventListener<UITest> {
@@ -110,7 +100,7 @@ public class UITest extends UIContainer {
 			UIPopupContainer uiPopupContainer = portlet.createUIComponent(UIPopupContainer.class, null, "formcontainer") ;
 			UIAddForm uiForm = uiPopupContainer.addChild(UIAddForm.class, null, null) ;
 			uiForm.init(s);
-			portlet.addPopup(uiForm, 400, 270);
+			portlet.addPopup(uiForm, 400, 400);
 			}catch (ItemNotFoundException e) {
 				portlet.addMessage(new ApplicationMessage("UITest.msg.item-not-found", null));
 			}

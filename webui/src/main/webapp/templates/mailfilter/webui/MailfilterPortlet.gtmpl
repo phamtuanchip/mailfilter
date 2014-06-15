@@ -23,7 +23,7 @@ import org.mailfilter.ui.view.UIContentViewer;
     uicomponent.renderChild(UIDataList.class);
 %>
 </div>
-<div class="col-xs-12 col-sm-6 col-md-9 col-lg-9 border-radius">
+<div class="col-xs-12 col-sm-6 col-md-9 col-lg-9  border-no-radius">
 <%
     
     uicomponent.renderChild(UIContentViewer.class);
