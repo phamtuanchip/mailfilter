@@ -109,7 +109,7 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 			UIAddForm uiForm = event.getSource() ;
 			Spammer es = MailfilterPortlet.getDataService().getSpammerById(uiForm.spammerId);
 			es.setEmail( 
-					uiForm.getUIStringInput("email").getValue());
+					uiForm.getUIFormTextAreaInput("email").getValue());
 			es.setStatus(uiForm.getUIFormSelectBox("status").getValue());
 			es.setDescription(uiForm.getUIFormTextAreaInput("description").getValue());
 			es.setSender(uiForm.getUIStringInput("domain").getValue());

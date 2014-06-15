@@ -25,13 +25,12 @@ Application implemented with basic function as the requirement of test:
 Installation steps:
 
 - 1)Pre-requirement  
-Maven 3.x
-Java SDK 7
-JAVA_HOME = 'Java JDK 7 folder'
-This web application compatible with browsers :
-FireFox 29
-Chrome  35
-Internet Explorer 11
+	Maven 3.x add 'path' system environment variable to your 'maven\bin' folder
+	Java SDK 7 set JAVA_HOME = 'Java JDK 7 folder'
+	This web application compatible with browsers :
+	FireFox 29
+	Chrome  35
+	Internet Explorer 11
 For binary source code you could get the latest from this link https://github.com/phamtuanchip/mailfilter/archive/v1.zip
 - 2) Unzip folder to anywhere you like e.g. C:\
 - 3) Buld with maven 
