@@ -5,7 +5,7 @@
 <div id="<%=uicomponent.getId()%>" class="UILessonList">
     <div class="panel panel-primary">
 		<div class="panel-heading">
-			 <input id='DataListSearch' type="text" class="form-control" placeholder="Search">
+			 <input id='DataListSearch' type="text" link="<%=uicomponent.getLink()%>" class="form-control" placeholder="Check email">
 		</div>
         <div class="panel-body">
    			<ul id='DataListSearchResult' >

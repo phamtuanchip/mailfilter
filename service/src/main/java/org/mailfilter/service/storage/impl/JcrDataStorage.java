@@ -341,7 +341,7 @@ public class JcrDataStorage implements DataStorage {
 		Collection<Spammer> list = new ArrayList<Spammer>();
 		try {
 			String domain = email;
-			if(email.contains("@") && email.split("@").length > 0) domain = email.split("@")[1];
+			if(email.contains("@") && email.split("@").length > 1) domain = email.split("@")[1];
 			if(domain != null && !domain.isEmpty()) {
 				String nt = Spammer.NT_NAME, proName =  Spammer.P_SENDER;
 				QueryManager qm = getStorageHome().getSession().getWorkspace().getQueryManager();

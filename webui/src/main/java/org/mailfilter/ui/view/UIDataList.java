@@ -4,6 +4,7 @@ package org.mailfilter.ui.view;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -37,6 +38,9 @@ public class UIDataList extends UIContainer {
 	return  list;
 }
 
+public String getLink(){
+	return "/" + PortalContainer.getInstance().getRestContextName() + "/mailfilter/api/search/";
+}
 public void setList(Collection<Spammer> list) {
 	this.list = list;
 }

@@ -88,7 +88,9 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 			try {
 			MailfilterPortlet.getDataService().addSpammer(es);
 			} catch (ItemExistsException ie) {
-				MailfilterPortlet.showMessage("UIAddForm.msg.item-exist", ApplicationMessage.WARNING, null);
+				String domain = es.getSender();
+				if(domain.split(".").length > 0) domain = domain.split(".")[0];
+				MailfilterPortlet.showMessage("UIAddForm.msg.item-exist", ApplicationMessage.WARNING, new Object[]{domain});
 				return;
 			}
 			MailfilterPortlet portlet = uiForm.getAncestorOfType(MailfilterPortlet.class) ;
