@@ -52,7 +52,7 @@ static public class AddSpammerActionListener extends EventListener<UIDataList> {
       MailfilterPortlet portlet = listview.getAncestorOfType(MailfilterPortlet.class);
       UIPopupContainer uiPopupContainer = portlet.createUIComponent(UIPopupContainer.class, null, "formcontainer") ;
       UIAddForm uiForm = uiPopupContainer.addChild(UIAddForm.class, null, null) ;
-      portlet.addPopup(uiForm, 400, 400);
+      portlet.addPopup(uiForm, 400, 350);
     }
   }
 

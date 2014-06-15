@@ -100,7 +100,7 @@ public class UITest extends UIContainer {
 			UIPopupContainer uiPopupContainer = portlet.createUIComponent(UIPopupContainer.class, null, "formcontainer") ;
 			UIAddForm uiForm = uiPopupContainer.addChild(UIAddForm.class, null, null) ;
 			uiForm.init(s);
-			portlet.addPopup(uiForm, 400, 400);
+			portlet.addPopup(uiForm, 400, 350);
 			}catch (ItemNotFoundException e) {
 				portlet.addMessage(new ApplicationMessage("UITest.msg.item-not-found", null));
 			}
