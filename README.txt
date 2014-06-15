@@ -5,24 +5,31 @@ Status
 
 
 This is web application base on GateIn portal to manage e-mail spammer
-PreFace
-Because in very sort time I chose the GateIn portal to develop the requirement, 
-which is a rich ui component portal and which I am familiar with.
-for more information you could visit http://gatein.jboss.org/
-Main technologies using here are:
-HSQL for storing data and quick development
-eXo JCR is a java content repository to work in model layer
-implement JcrDataStorage for mail filter API 
-implement MailfilterWebservice to provide rest service for application
-implement MailfilterServiceTest, TestWebservice for unit test service API and web service 
-and various of GateIn base technologies,
-Application implemented with basic function as the requirement of test:
-- Auto add banned domain by xml configuration at initialize time 
-- Add new spammer form : with domain name validation 
-- List all spammer by status: default(all), pending (waiting for validation), blocked( already blocked), archive (archived)
-- Search box with ajax real time search and using rest service to response the search result
+- Introduction 
+	Because in very sort time I chose the GateIn portal to develop the requirement, 
+	which is a rich ui component portal and which I am familiar with.
+	for more information you could visit http://gatein.jboss.org/
+	Main technologies using here are:
+	HSQL for storing data and quick development
+	eXo JCR is a java content repository to work in model layer
+	implement JcrDataStorage for mail filter API 
+	implement MailfilterWebservice to provide rest service for application
+	implement MailfilterServiceTest, TestWebservice for unit test service API and web service 
+	and various of GateIn base technologies,
+	Application implemented with basic function as the requirement of test:
+	- Auto add banned domain by xml configuration at initialize time 
+	- Add new spammer form : with domain name validation 
+	- List all spammer by status: default(all), pending (waiting for validation), blocked( already blocked), archive (archived)
+	- Search box with ajax real time search and using rest service to response the search result
 
-Installation steps:
+- Summary
+  Because very sort of time I have no enough time to finish the 'bonus' part, it's really a pity because 
+  I could finish it as my knowledge about Selenium SDK 
+  Current search function is not really good user experiences, if have time I will implement more intelligence search action, 
+  I mean when user type an email, if it is could not find an existed recode in database it will have suggestion with action to 
+  open add spammer form so it should be very convince with user 
+  If have more time I will implement another JcrDataStorage for mongoDb it will show my knowledge about mongoDB in action.
+- Installation steps:
 
 - 1)Pre-requirement  
 	Maven 3.x add 'path' system environment variable to your 'maven\bin' folder
