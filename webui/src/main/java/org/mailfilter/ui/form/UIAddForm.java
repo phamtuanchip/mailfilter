@@ -4,6 +4,9 @@ package org.mailfilter.ui.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.ItemExistsException;
+
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -82,7 +85,12 @@ public class UIAddForm extends UIForm implements UIPopupComponent{
 			es.setStatus(uiForm.getUIFormSelectBox("status").getValue());
 			es.setDescription(uiForm.getUIFormTextAreaInput("description").getValue());
 			es.setSender(uiForm.getUIStringInput("domain").getValue());
+			try {
 			MailfilterPortlet.getDataService().addSpammer(es);
+			} catch (ItemExistsException ie) {
+				MailfilterPortlet.showMessage("UIAddForm.msg.item-exist", ApplicationMessage.WARNING, null);
+				return;
+			}
 			MailfilterPortlet portlet = uiForm.getAncestorOfType(MailfilterPortlet.class) ;
 			portlet.closePopup();
 			UIContentViewer view = portlet.findFirstComponentOfType(UIContentViewer.class) ;

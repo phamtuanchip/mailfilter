@@ -4,6 +4,8 @@ package org.mailfilter.test;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.jcr.ItemExistsException;
+
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
@@ -53,7 +55,7 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 		assertNotNull(storage_);
 
 	}
-	
+
 
 	private Spammer createSpamer(String email, String sender, String status, String des) {
 		Spammer s = new Spammer();
@@ -63,12 +65,12 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 		s.setStatus(status);
 		return s;
 	}
-	
+
 
 	//mvn test -Dtest=MailfilterServiceTest#testDefaultInitliliazeSpamer
 	public void testDefaultInitliliazeSpamer() throws Exception {
 		if(storage_.listSpammer().size()>0)
-		 assertEquals(5, storage_.listSpammer().size());
+			assertEquals(5, storage_.listSpammer().size());
 	}
 
 
@@ -76,6 +78,20 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 	public void testAddSpamer() throws Exception {
 		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
 		assertNotNull(storage_.addSpammer(s));
+	}
+
+	//mvn test -Dtest=MailfilterServiceTest#testAddSpamerIfExist
+	public void testAddSpamerIfExist() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+		s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		try {
+			storage_.addSpammer(s);
+		} catch (ItemExistsException ie) {
+			assert true;
+		}
+
+
 	}
 
 	//mvn test -Dtest=MailfilterServiceTest#testGetSpamerById
@@ -113,17 +129,18 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 		assertEquals(0, storage_.listSpammer().size());
 	}
 
+
 	//mvn test -Dtest=MailfilterServiceTest#testListSpammerByStatus
 	public void testListSpammerByStatus() throws Exception {
 		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
 		assertNotNull(storage_.addSpammer(s));
 		assertEquals(1, storage_.listSpammerByStatus("1").size());
 
-		s = createSpamer("phamtuanchip@mail.com", "mail.com", "2", "description");
+		s = createSpamer("phamtuanchip@mail.com", "gmail.com", "2", "description");
 		assertNotNull(storage_.addSpammer(s));
 		assertEquals(1, storage_.listSpammerByStatus("2").size());
 
-		s = createSpamer("phamtuanchip@mail.com", "mail.com", "3", "description");
+		s = createSpamer("phamtuanchip@mail.com", "hotmail.com", "3", "description");
 		assertNotNull(storage_.addSpammer(s));
 		assertEquals(1, storage_.listSpammerByStatus("3").size());
 
@@ -132,22 +149,22 @@ public class MailfilterServiceTest extends BaseServiceTestCase {
 	}
 
 	//mvn test -Dtest=MailfilterServiceTest#testSearchSpammerByEmail
-		public void testSearchSpammerByEmail() throws Exception {
-			Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
-			assertNotNull(storage_.addSpammer(s));
-			 
-			s = createSpamer("phamtuanchip@mail.com", "gmail.com", "2", "description");
-			assertNotNull(storage_.addSpammer(s));
-			 
+	public void testSearchSpammerByEmail() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
 
-			s = createSpamer("phamtuanchip@mail.com", "hotmail.com", "3", "description");
-			assertNotNull(storage_.addSpammer(s));
-			 
+		s = createSpamer("phamtuanchip@mail.com", "gmail.com", "2", "description");
+		assertNotNull(storage_.addSpammer(s));
 
-			assertEquals(3, storage_.listSpammer().size());
-			
-			assertEquals(1, storage_.searchSpammerByEmail("phamtuanchip@hotmail.com").size());
 
-		}
+		s = createSpamer("phamtuanchip@mail.com", "hotmail.com", "3", "description");
+		assertNotNull(storage_.addSpammer(s));
+
+
+		assertEquals(3, storage_.listSpammer().size());
+
+		assertEquals(1, storage_.searchSpammerByEmail("phamtuanchip@hotmail.com").size());
+
+	}
 
 }

@@ -1,6 +1,7 @@
 
 package org.mailfilter.ui.view;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.exoplatform.portal.webui.container.UIContainer;
@@ -9,7 +10,6 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.mailfilter.service.model.Spammer;
-import org.mailfilter.service.storage.DataStorage;
 import org.mailfilter.ui.form.UIAddForm;
 import org.mailfilter.ui.popup.UIPopupContainer;
 import org.mailfilter.ui.portlet.MailfilterPortlet;
@@ -21,24 +21,20 @@ import org.mailfilter.ui.portlet.MailfilterPortlet;
                      @EventConfig(listeners = UIDataList.ListAllActionListener.class),
                      @EventConfig(listeners = UIDataList.ListArchiveActionListener.class),
                      @EventConfig(listeners = UIDataList.ListBlockedActionListener.class),
-                     @EventConfig(listeners = UIDataList.ListPendingActionListener.class)
+                     @EventConfig(listeners = UIDataList.ListPendingActionListener.class),
+                     @EventConfig(listeners = UIDataList.SearchActionListener.class)
                  }
     )
 
 public class UIDataList extends UIContainer {
-  private Collection<Spammer> list;
+  private Collection<Spammer> list = new ArrayList<Spammer>();
 
   public UIDataList() {
-    DataStorage service = MailfilterPortlet.getDataService();
-    try {
-      list = service.listSpammer();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    
   }
 
   public Collection<Spammer> getList() throws Exception {
-	return  MailfilterPortlet.getDataService().listSpammer();
+	return  list;
 }
 
 public void setList(Collection<Spammer> list) {
@@ -55,6 +51,16 @@ static public class AddSpammerActionListener extends EventListener<UIDataList> {
       portlet.addPopup(uiForm, 400, 270);
     }
   }
+
+static public class SearchActionListener extends EventListener<UIDataList> {
+    @Override
+    public void execute(Event<UIDataList> event) throws Exception {
+      UIDataList listview = event.getSource() ;
+      String email = event.getRequestContext().getRequestParameter(OBJECTID); 
+      listview.setList(MailfilterPortlet.getDataService().searchSpammerByEmail(email)) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(listview);
+    }
+  }	
 
   static public class ListAllActionListener extends EventListener<UIDataList> {
     @Override

@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -51,7 +52,11 @@ public class JcrDataStorage implements DataStorage {
 						s.setEmail("*.*");
 						s.setDescription("block andy email from this donmain: " + name);
 						s.setStatus(Spammer.ST_BLOCK);
-						addSpammer(s);
+						try {
+							addSpammer(s);
+						}catch (ItemExistsException e) {
+							continue;
+						}
 					}
 				}
 			} catch (Exception e) {
@@ -254,6 +259,7 @@ public class JcrDataStorage implements DataStorage {
 	public Spammer addSpammer(Spammer s) throws Exception {
 		Node qHome = getFilterHome();
 		Node spamerNode ;
+		if(isExists(Spammer.NT_NAME, Spammer.P_SENDER, s.getSender())) throw new ItemExistsException();
 		try {
 			spamerNode = setSpamerProp(s, qHome.addNode(s.getId(), Spammer.NT_NAME));
 			spamerNode.getSession().save();
@@ -334,13 +340,16 @@ public class JcrDataStorage implements DataStorage {
 			throws Exception {
 		Collection<Spammer> list = new ArrayList<Spammer>();
 		try {
-			String domain = email.split("@")[1];
-			String nt = Spammer.NT_NAME, proName =  Spammer.P_SENDER;
-			QueryManager qm = getStorageHome().getSession().getWorkspace().getQueryManager();
-			Query q = qm.createQuery("SELECT "+proName+" FROM " + nt + " WHERE " + proName + " LIKE '%" + domain +"%'", Query.SQL);
-			NodeIterator it = q.execute().getNodes() ;
-			while (it.hasNext()) {
-				list.add(getSpamerProp(it.nextNode()));
+			String domain = email;
+			if(email.contains("@") && email.split("@").length > 0) domain = email.split("@")[1];
+			if(domain != null && !domain.isEmpty()) {
+				String nt = Spammer.NT_NAME, proName =  Spammer.P_SENDER;
+				QueryManager qm = getStorageHome().getSession().getWorkspace().getQueryManager();
+				Query q = qm.createQuery("SELECT "+proName+" FROM " + nt + " WHERE " + proName + " LIKE '%" + domain +"%'", Query.SQL);
+				NodeIterator it = q.execute().getNodes() ;
+				while (it.hasNext()) {
+					list.add(getSpamerProp(it.nextNode()));
+				}
 			}
 			return list;
 		} catch (Exception e) {
