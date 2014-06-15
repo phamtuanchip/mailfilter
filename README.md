@@ -6,7 +6,8 @@ Status
 
 This is web application base on GateIn portal to manage e-mail spammer
 PreFace
-Because in very sort time I chose the GateIn portal to develop the requirement because it a rich ui component portal, wich I am familer with.
+Because in very sort time I chose the GateIn portal to develop the requirement, 
+which is a rich ui component portal and which I am familiar with.
 for more information you could visit http://gatein.jboss.org/
 Main technologies using here are:
 HSQL for storing data and quick development
@@ -44,7 +45,8 @@ For binary source code you could get the latest from this link https://github.co
  
 - 5)Troubleshooting 
 - 5.1) Repository are not available:
-in 'mailfilter' folder we have global settings.xml for maven, when we execute by script make sure internet available and this url https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=drive_web should be accessible     
+in 'mailfilter' folder we have global settings.xml for maven, when we execute by script make sure internet available
+ and this url http://repository.exoplatform.org/public/ should be accessible     
 if you are under proxy please add those config to settings.xml file and call build script again;
   <proxies>
     <proxy>
@@ -69,13 +71,15 @@ in this case you could execute these :
  Windows OS :  'mvn-pkg.bat' 
  Linux|Mac OS  'mvn-pkg.sh' 
 
-- 5.3) if you get stuck by any other problem you could try to get fully tomcat bundle I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=sharing
+- 5.3) if you get stuck by any other problem you could try to get fully tomcat bundle 
+I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=sharing
 and select to download the 'tomcat' bundle. It's the fastest way to have demonstrate without any development steps 
 after get tomcat bundle, go to 'tomcat\bin' and execute :
 Windows : 'gatein.bat run'
 Linux|Mac OS : 'gatein.sh run'
 
-- 5.4) Could not start server because some port already is use, this server will take all the port define in tomcat\conf\server.xml 
+- 5.4) Could not start server because some port already is use, 
+this server will take all the port define in tomcat\conf\server.xml 
  8005 : shutdown application 
  8080 : http port
  8009 : ajp port
@@ -93,7 +97,9 @@ Jun 15, 2014 3:33:07 PM org.apache.catalina.startup.Catalina start
 INFO: Server startup in 130483 ms "
 
  mean that you already start for the web application
-Open browser with url htt://localhost:8080/portal wait several seconds you will see the complete ui for web server and with the link mailFilter in navigation or detail url will be http://localhost:8080/portal/classic/mailfilterPage
+Open browser with url htt://localhost:8080/portal wait several seconds 
+you will see the complete ui for web server and with the link mailFilter in navigation 
+or detail url will be http://localhost:8080/portal/classic/mailfilterPage
 you will go to application now you could test as well. There are some functions you could test:
 - 6.1) Default display all initialize data base 
 - 6.2) Search box, this using to check email to see does it in any domain persisted on database or not 
