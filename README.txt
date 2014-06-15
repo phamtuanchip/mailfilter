@@ -28,7 +28,7 @@ This is web application base on GateIn portal to manage e-mail spammer
   Current search function is not really good user experiences, if have time I will implement more intelligence search action, 
   I mean when user type an email, if it is could not find an existed recode in database it will have suggestion with action to 
   open add spammer form so it should be very convince with user 
-  If have more time I will implement another JcrDataStorage for mongoDb it will show my knowledge about mongoDB in action.
+  If have more time I will implement another JcrDataStorage for MongoDB it will show my knowledge about MongoDB in action.
 - Installation steps:
 
 - 1)Pre-requirement  
@@ -72,8 +72,8 @@ This is web application base on GateIn portal to manage e-mail spammer
   For binary source code you could get the latest from this link https://github.com/phamtuanchip/mailfilter/archive/v1.zip
   Unzip folder to anywhere you like e.g. C:\
   Buld with maven 
-- 4.1) Windows OS :  'mvn-clean-install.bat' 
-- 4.2) Linux|Mac OS  'mvn-clean-install.sh' 
+- 4.1) Windows OS :  'mvn-pkg.bat' 
+- 4.2) Linux|Mac OS  'mvn-pkg.sh' 
 - 5) If build for all success could start the server:
 - 5.2) Windows OS :
   go to 'C:\mailfilter\packaging\tomcat\tomcat7\target\tomcat\bin\' and call 'gatein.bat run'
