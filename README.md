@@ -61,7 +61,7 @@ Installation steps:
 		
 	
 	
-- 4) Check source code and build your self 
+- 4) Check source code and build yourself 
   For binary source code you could get the latest from this link https://github.com/phamtuanchip/mailfilter/archive/v1.zip
   Unzip folder to anywhere you like e.g. C:\
   Buld with maven 
