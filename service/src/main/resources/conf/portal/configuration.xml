@@ -14,7 +14,35 @@
       </properties-param>
     </init-params>
   </component>
-	
+  
+  
+  <component>
+    <key>org.mailfilter.service.storage.MongoStorage</key>
+    <type>org.mailfilter.service.storage.MongoStorage</type>
+    <init-params>
+        <value-param>
+          <name>host</name>
+          <description>Host of MongoDB</description>
+          <value>localhost</value>
+        </value-param>
+        <value-param>
+          <name>port</name>
+          <description>Port of MongoDB</description>
+          <value>27017</value>
+        </value-param>
+        <value-param>
+          <name>data</name>
+          <description>DB Name</description>
+          <value>mailfilter</value>
+        </value-param>
+    </init-params>
+  </component>
+  
+  <component>
+    <key>org.mailfilter.service.storage.impl.MongoDataStorage</key>
+    <type>org.mailfilter.service.storage.impl.MongoDataStorage</type>
+  </component>
+  
 	<component>
 	  <key>org.exoplatform.services.rest.RequestHandler</key>
 	  <type>org.exoplatform.services.rest.impl.RequestHandlerImpl</type>

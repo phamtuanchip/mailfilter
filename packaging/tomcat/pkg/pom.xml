@@ -14,7 +14,13 @@
   <name>mailfilter for Tomcat packaging</name>
 
   <dependencies>
-  
+	<!-- mongo db -->
+	
+	<dependency>
+		<groupId>org.mongodb</groupId>
+		<artifactId>mongo-java-driver</artifactId>
+		<version>2.11.1</version>
+	</dependency>
     <!-- mailfilter components -->
     <dependency>
       <groupId>org.mailfilter</groupId>
