@@ -3,14 +3,9 @@ package org.mailfilter.service.storage;
 
 import java.util.Collection;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.mailfilter.service.model.Spammer;
  
 public interface DataStorage {
-  public Node getStorageHome() throws RepositoryException, Exception;
-  
   
   // mail filer api
   

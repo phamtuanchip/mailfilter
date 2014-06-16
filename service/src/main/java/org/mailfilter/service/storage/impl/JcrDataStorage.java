@@ -160,7 +160,7 @@ public class JcrDataStorage implements DataStorage {
 
 	// filter app
 
-	public Node getStorageHome() throws RepositoryException, Exception {
+	private Node getStorageHome() throws RepositoryException, Exception {
 		SessionProvider sProvider = createSessionProvider();
 		Node publicApp = sProvider.getSession(repoService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(), repoService_.getCurrentRepository()).getRootNode(); 
 		try {
