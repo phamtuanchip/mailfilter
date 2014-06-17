@@ -49,6 +49,7 @@
   <activeProfiles>
     <activeProfile>exo-central</activeProfile>
   </activeProfiles>
+   <!-- 
    <proxies>
     <proxy>
       <id>httpproxy</id>
@@ -67,5 +68,6 @@
       
     </proxy>
   </proxies>
+  -->
 </settings>
 
