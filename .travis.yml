@@ -2,6 +2,7 @@ language: java
 before_install:
 install: 
 - echo off
+- chmod +x *.sh
 #- mvn clean install -s settings.xml -Ppkg-tomcat -Ddownload
 script:
 - ./mvn-pkg.sh

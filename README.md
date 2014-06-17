@@ -1,4 +1,4 @@
-E-mail filter v2
+E-mail filter v2 with mongodb implementation
 ==========
 Status 
 [![Build Status](https://travis-ci.org/phamtuanchip/mailfilter.png)](https://travis-ci.org/phamtuanchip/mailfilter)
@@ -46,9 +46,9 @@ This version cover about implementation with mongodb
 
 - 2.1) Download Mongodb server download from there http://fastdl.mongodb.org/win32/mongodb-win32-i386-2.6.1.zip 
 	   Unzip and setting 'path' environment variable to 'mongodbserver\bin'
-	   Start mongoDb 
+	   Start mongoDb make sure you clean ub 'data/db' folder or point to empty 'db' folder
        Go to 'C:\' create folder 'data\db' call 'mongod --dbpath ./data/db' to start mongodb server
-- 2.2) I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=sharing
+- 2.2) I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBOG1VWElCUC1nYTA&usp=sharing
 	and select to download the 'tomcat-mongo' bundle. It's the fastest way to have demonstrate without any development steps 
 	Start tomcat server: After get tomcat bundle, unzip and go to 'tomcat\bin' and execute :
 	Windows : 'gatein.bat run'
@@ -90,7 +90,7 @@ This version cover about implementation with mongodb
   go to '/mailfilter/packaging/tomcat/tomcat7/target/tomcat/bin/' and call 'gatein.sh run'
  
 - 6)Troubleshooting 
-- 6.1) Repository are not available:
+- 6.1) Repository are not available when build:
 	in 'mailfilter' folder we have global settings.xml for maven, when we execute by script make sure internet available
 	 and this url http://repository.exoplatform.org/public/ should be accessible     
 	if you are under proxy please add those config to settings.xml file and call build script again;
@@ -111,20 +111,25 @@ This version cover about implementation with mongodb
 		  <port>{your-proxy-port}</port>
 		</proxy>
 	  </proxies>
-- 6.2) could not get tomcat clean server for deployment 
+- 6.2) Could not get clean tomcat server for deployment 
 	in the phase of build it will get clean tomcat from repository and deploy with bundle war jar define in 'package' module  
 	in this case you could execute these :
 	 Windows OS :  'mvn-pkg.bat' 
 	 Linux|Mac OS  'mvn-pkg.sh' 
 
-- 6.3) if you get stuck by any other problem you could try to get fully tomcat bundle 
-	I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=sharing
-	and select to download the 'tomcat' bundle. It's the fastest way to have demonstrate without any development steps 
+- 6.3) Could not build because mongodb does not start 
+	   Make sure you start mongodb server before you would like to build project because all unit test with mongodb implementation will be fails
+       Please back to step 2.1) to check and start the mongodb server. I notice that you should empty all content in 'data/db' before to build.	   
+- 6.4) Could not run server because mongodb does not start
+       This case same as in step 6.3) please make sure you finish step 2.1) before you start tomcat server 
+- 6.5) if you get stuck by any other problem you could try to get fully tomcat bundle 
+	I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBOG1VWElCUC1nYTA&usp=sharing
+	and select to download the 'tomcat-mongo' bundle. It's the fastest way to have demonstrate without any development steps 
 	after get tomcat bundle, go to 'tomcat\bin' and execute :
 	Windows : 'gatein.bat run'
 	Linux|Mac OS : 'gatein.sh run'
 
-- 6.4) Could not start server because some port already is use, 
+- 6.6) Could not start server because some port already is use, 
 	this server will take all the port define in tomcat\conf\server.xml 
 	 8005 : shutdown application 
 	 8080 : http port
@@ -132,8 +137,9 @@ This version cover about implementation with mongodb
 	 8443 : for redirection port
 	 so please make sure those port does not use when you start server
 	 
+- 7) Bug reports and issues tracker please create issue there https://www.hostedredmine.com/projects/mailfilter
 
-- 7) For any unclear, unavailable to start contact me:
+- 8) For any unclear, unavailable to start contact me:
 	phamtuanchip@gmail.com
 	mobile: +84 902318580
 	skype : phamtuanchip
