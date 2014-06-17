@@ -1,4 +1,4 @@
-mailfilter
+E-mail filter v2
 ==========
 Status 
 [![Build Status](https://travis-ci.org/phamtuanchip/mailfilter.png)](https://travis-ci.org/phamtuanchip/mailfilter)
@@ -29,7 +29,7 @@ This version cover about implementation with mongodb
   Current search function is not really good user experiences, if have time I will implement more intelligence search action, 
   I mean when user type an email, if it is could not find an existed recode in database it will have suggestion with action to 
   open add spammer form so it should be very convince with user 
-  If have more time I will implement another JcrDataStorage for MongoDB it will show my knowledge about MongoDB in action.
+   
 - Installation steps:
 
 - 1)Pre-requirement  
@@ -41,16 +41,19 @@ This version cover about implementation with mongodb
 	Internet Explorer 11
 	Mongodb server download from there http://fastdl.mongodb.org/win32/mongodb-win32-i386-2.6.1.zip
 	Help to start http://dochub.mongodb.org/core/startingandstoppingmongo
-- 2) Run test without development source code
-	I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=sharing
-	and select to download the 'tomcat' bundle. It's the fastest way to have demonstrate without any development steps 
-	after get tomcat bundle, go to 'tomcat\bin' and execute :
+	
+- 2) Run test without development source code with mongodb
+
+- 2.1) Download Mongodb server download from there http://fastdl.mongodb.org/win32/mongodb-win32-i386-2.6.1.zip 
+	   Unzip and setting 'path' environment variable to 'mongodbserver\bin'
+	   Start mongoDb 
+       Go to 'C:\' create folder 'data\db' call 'mongod --dbpath ./data/db' to start mongodb server
+- 2.2) I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=sharing
+	and select to download the 'tomcat-mongo' bundle. It's the fastest way to have demonstrate without any development steps 
+	Start tomcat server: After get tomcat bundle, unzip and go to 'tomcat\bin' and execute :
 	Windows : 'gatein.bat run'
 	Linux|Mac OS : 'gatein.sh run'
-- 2.1) Start mongoDb 
-       Download mongoDb setting 'path' environment variable to 'mongodbserver\bin'
-       go to 'mailFilter' call 'mongod --dbpath ./data/db'
-       	   
+	
 - 3) Start using application 
 	After run execution scrip in step 2 if you see this line in console :
 
