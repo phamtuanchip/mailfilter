@@ -23,6 +23,7 @@ import org.exoplatform.services.security.Identity;
 import org.mailfilter.service.model.Spammer;
 import org.mailfilter.service.storage.DataStorage;
 import org.mailfilter.service.storage.impl.JcrDataStorage;
+import org.mailfilter.service.storage.impl.MongoDataStorage;
 
 //localhost:8080/rest/mailfilter/api/
 @Path("/mailfilter/api")
@@ -44,6 +45,7 @@ public class MailfilterWebservice implements ResourceContainer{
 	}
 
 	private DataStorage storage_ = null;
+	private DataStorage storage_mg = null;
 	private Object getJcrDataStorage() {
 		storage_ = (DataStorage)ExoContainerContext.getCurrentContainer()
 				.getComponentInstanceOfType(JcrDataStorage.class);
@@ -52,10 +54,22 @@ public class MailfilterWebservice implements ResourceContainer{
 		}
 		return storage_;
 	}
+	
+	private Object getJcrDataStorageMg() {
+		storage_mg = (DataStorage)ExoContainerContext.getCurrentContainer()
+				.getComponentInstanceOfType(MongoDataStorage.class);
+		if(storage_mg == null){
+			return Response.status(HTTPStatus.UNAVAILABLE).cacheControl(cc).build();
+		}
+		return storage_mg;
+	}
 
 	public MailfilterWebservice() {
 		storage_ = (DataStorage)ExoContainerContext.getCurrentContainer()
 				.getComponentInstanceOfType(JcrDataStorage.class);
+		
+		storage_mg = (DataStorage)ExoContainerContext.getCurrentContainer()
+				.getComponentInstanceOfType(MongoDataStorage.class);
 	}
 
 
@@ -80,9 +94,24 @@ public class MailfilterWebservice implements ResourceContainer{
 	//@RolesAllowed("users")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/search/{email}")
-	public Response getCategoryById(@PathParam("email") String email) throws Exception {
+	public Response searchDomain(@PathParam("email") String email) throws Exception {
 		try {
 			Collection<Spammer> list = storage_.searchSpammerByEmail(email);
+			return Response.ok(list, MediaType.APPLICATION_JSON).cacheControl(cc).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(HTTPStatus.INTERNAL_ERROR).cacheControl(cc).build();
+		}
+
+	}
+	
+	@GET
+	//@RolesAllowed("users")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/mg/search/{email}")
+	public Response searchDomainFromMongo(@PathParam("email") String email) throws Exception {
+		try {
+			Collection<Spammer> list = storage_mg.searchSpammerByEmail(email);
 			return Response.ok(list, MediaType.APPLICATION_JSON).cacheControl(cc).build();
 		} catch (Exception e) {
 			e.printStackTrace();

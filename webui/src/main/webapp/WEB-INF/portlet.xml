@@ -40,6 +40,11 @@
         <value>10</value>
         <read-only>false</read-only>
       </preference>
+       <preference>
+        <name>usingMongoDB</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
     </portlet-preferences>
   </portlet>  
 </portlet-app>

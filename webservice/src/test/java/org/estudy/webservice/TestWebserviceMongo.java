@@ -32,10 +32,11 @@ import org.exoplatform.ws.frameworks.json.value.JsonValue;
 import org.mailfilter.service.model.Spammer;
 import org.mailfilter.service.storage.DataStorage;
 import org.mailfilter.service.storage.impl.JcrDataStorage;
+import org.mailfilter.service.storage.impl.MongoDataStorage;
 import org.mailfilter.webservice.MailfilterWebservice;
 
  
-public class TestWebservice extends AbstractResourceTest {
+public class TestWebserviceMongo extends AbstractResourceTest {
 
 	org.mailfilter.service.storage.DataStorage storage_;
 	MailfilterWebservice webservice;
@@ -51,7 +52,7 @@ public class TestWebservice extends AbstractResourceTest {
 		RuntimeDelegate.setInstance(new RuntimeDelegateImpl());
 		super.setUp();
 		webservice = (MailfilterWebservice) container.getComponentInstanceOfType(MailfilterWebservice.class);
-		storage_ = (DataStorage) container.getComponentInstanceOfType(JcrDataStorage.class);
+		storage_ = (DataStorage) container.getComponentInstanceOfType(MongoDataStorage.class);
 		binder.addResource(webservice, null);
 		login(username) ;
 		h.putSingle("username", username);
@@ -59,7 +60,7 @@ public class TestWebservice extends AbstractResourceTest {
 
 	public void tearDown() throws Exception {
 		super.tearDown();
-		for(Spammer s : storage_.listSpammer()) storage_.removeSpammer(s);	  
+		for(Spammer s : storage_.listSpammer()) storage_.removeSpammer(s);	 
 		 
 
 	}
@@ -73,7 +74,7 @@ public class TestWebservice extends AbstractResourceTest {
 		s.setEmail("phamtuanchip@hotmail.com");
 		s.setSender("hotmail.com");
 		
-		String extURI = "/mailfilter/api/search/someone@hotmail.com" ; 
+		String extURI = "/mailfilter/api/mg/search/someone@hotmail.com" ; 
 
 		ByteArrayContainerResponseWriter writer = new ByteArrayContainerResponseWriter();
 

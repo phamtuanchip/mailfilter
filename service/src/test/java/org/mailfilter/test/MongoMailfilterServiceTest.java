@@ -106,7 +106,7 @@ public class MongoMailfilterServiceTest extends BaseServiceTestCase {
 			assertEquals(5, storage_.listSpammer().size());
 	}
 
-
+	 */
 
 	//mvn test -Dtest=MongoMailfilterServiceTest#testGetSpamerById
 	public void testGetSpamerById() throws Exception {
@@ -172,5 +172,5 @@ public class MongoMailfilterServiceTest extends BaseServiceTestCase {
 		assertEquals(1, storage_.searchSpammerByEmail("phamtuanchip@hotmail.com").size());
 
 	}
-	 */
+	 
 }

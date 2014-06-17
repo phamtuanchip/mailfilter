@@ -4,8 +4,12 @@ package org.mailfilter.ui.view;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.portlet.PortletPreferences;
+
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.webui.container.UIContainer;
+import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -39,6 +43,10 @@ public class UIDataList extends UIContainer {
 }
 
 public String getLink(){
+	PortletRequestContext pcontext = (PortletRequestContext) RequestContext.getCurrentInstance();
+	PortletPreferences portletPref = pcontext.getRequest().getPreferences();
+	Boolean isMongo = Boolean.parseBoolean(portletPref.getValue("usingMongoDB", "false").trim());
+	if(isMongo) return "/" + PortalContainer.getInstance().getRestContextName() + "/mailfilter/api/mg/search/";
 	return "/" + PortalContainer.getInstance().getRestContextName() + "/mailfilter/api/search/";
 }
 public void setList(Collection<Spammer> list) {

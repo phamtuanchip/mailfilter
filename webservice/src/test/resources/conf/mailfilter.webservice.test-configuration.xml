@@ -12,9 +12,41 @@
       <type>org.exoplatform.services.rest.impl.ResourceBinder</type>
    </component>
   <!-- custominze service to test -->
+  <!-- mailfilter -->
   <component>
     <key>org.mailfilter.service.storage.DataStorage</key>
     <type>org.mailfilter.service.storage.impl.JcrDataStorage</type>
+    <init-params>
+      <properties-param>
+        <name>default.server.bannned</name>
+        <property name="name" value="altavista.com,dynamitemail.com,horrormail.com,pochta.ru,web-police.com"/>         
+      </properties-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.mailfilter.service.storage.MongoStorage</key>
+    <type>org.mailfilter.service.storage.MongoStorage</type>
+    <init-params>
+        <value-param>
+          <name>host</name>
+          <description>Host of MongoDB</description>
+          <value>localhost</value>
+        </value-param>
+        <value-param>
+          <name>port</name>
+          <description>Port of MongoDB</description>
+          <value>27017</value>
+        </value-param>
+        <value-param>
+          <name>data</name>
+          <description>DB Name</description>
+          <value>mailfilter</value>
+        </value-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.mailfilter.service.storage.MongoDataStorage</key>
+    <type>org.mailfilter.service.storage.impl.MongoDataStorage</type>
   </component>
   <component>
     <type>org.mailfilter.webservice.MailfilterWebservice</type>
