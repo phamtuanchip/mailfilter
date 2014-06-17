@@ -2,9 +2,14 @@
 package org.mailfilter.service.storage.impl;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
+import javax.jcr.ItemExistsException;
+
 import org.apache.commons.lang.Validate;
+import org.bson.types.ObjectId;
 import org.mailfilter.service.model.Spammer;
 import org.mailfilter.service.model.SpammerMongoEntity;
 import org.mailfilter.service.storage.DataStorage;
@@ -12,6 +17,7 @@ import org.mailfilter.service.storage.MongoStorage;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 
 public class MongoDataStorage implements DataStorage {
 	MongoStorage storage_;
@@ -91,6 +97,13 @@ public class MongoDataStorage implements DataStorage {
 		storage_ = dataStore;
 	}
 
+	private boolean isExist(Spammer s) {
+		DBCollection collection = CollectionName.FILTER_COLLECTION.getCollection(this);
+		BasicDBObject query = new BasicDBObject();
+		query.append(SpammerMongoEntity.sender.getName(), s.getSender());
+		BasicDBObject entity = (BasicDBObject) collection.findOne(query);
+		return entity != null;
+	}
 	@Override
 	public Spammer getSpammerById(String id) throws Exception {
 		// TODO Auto-generated method stub
@@ -99,8 +112,29 @@ public class MongoDataStorage implements DataStorage {
 
 	@Override
 	public Collection<Spammer> listSpammer() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		DBCollection connectionColl = CollectionName.FILTER_COLLECTION.getCollection(this);
+
+		BasicDBObject query = new BasicDBObject();
+		//sort by time DESC
+		BasicDBObject sortObj = new BasicDBObject(SpammerMongoEntity.sender.getName(), -1);
+		BasicDBObject fields = new BasicDBObject(SpammerMongoEntity.email.getName(), 1)
+		.append(SpammerMongoEntity.status.getName(), 1);
+
+		//int limit = 1;
+		//DBCursor cur = connectionColl.find(query, fields).sort(sortObj).limit(limit);
+		DBCursor cur = connectionColl.find(query, fields).sort(sortObj);
+		List<Spammer> result = new LinkedList<Spammer>();
+		while (cur.hasNext()) {
+			BasicDBObject row = (BasicDBObject) cur.next();
+			Spammer s = new Spammer();
+			s.setId(row.getString(SpammerMongoEntity.id.getName()));
+			s.setSender(row.getString(SpammerMongoEntity.sender.getName()));
+			s.setEmail(row.getString(SpammerMongoEntity.email.getName()));
+			s.setStatus(row.getString(SpammerMongoEntity.status.getName()));
+			s.setDescription(row.getString(SpammerMongoEntity.description.getName()));
+			result.add(s);
+		}
+		return result;
 	}
 
 	@Override
@@ -112,8 +146,10 @@ public class MongoDataStorage implements DataStorage {
 
 	@Override
 	public void removeSpammer(Spammer s) throws Exception {
-		// TODO Auto-generated method stub
-
+		DBCollection connectionColl = CollectionName.FILTER_COLLECTION.getCollection(this);
+		BasicDBObject query = new BasicDBObject();
+		query.append(SpammerMongoEntity.id.getName(), s.getId());
+		connectionColl.remove(query);
 	}
 
 	@Override
@@ -127,13 +163,25 @@ public class MongoDataStorage implements DataStorage {
 		try {
 			Validate.notNull(s, "Spammer must not be null.");
 			Validate.notNull(s.getSender(), "Domain must not be null.");
+			if(isExist(s)) throw new ItemExistsException();
+			DBCollection collection = CollectionName.FILTER_COLLECTION.getCollection(this);
+			BasicDBObject spamer = new BasicDBObject();
+			spamer.append(SpammerMongoEntity.id.getName(), s.getId());
+			spamer.append(SpammerMongoEntity.sender.getName(), s.getSender());
+			spamer.append(SpammerMongoEntity.status.getName(), s.getStatus());
+			spamer.append(SpammerMongoEntity.description.getName(), s.getDescription());
+			spamer.append(SpammerMongoEntity.email.getName(), s.getEmail());
+			collection.insert(spamer);
+			return s;
 		} catch (IllegalArgumentException e) {
 			throw new Exception(e.getMessage());
+		} catch (ItemExistsException e){
+			throw e;
+		} catch (Exception e){
+			e.printStackTrace();
+			return null;
 		}
-		DBCollection collection = CollectionName.FILTER_COLLECTION.getCollection(this);
-		BasicDBObject spamer = new BasicDBObject();
-		collection.insert(spamer);
-		return s;
+
 	}
 
 	@Override

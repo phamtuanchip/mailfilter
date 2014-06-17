@@ -5,6 +5,7 @@ Status
 
 
 This is web application base on GateIn portal to manage e-mail spammer
+This version cover about implementation with mongodb
 - Introduction 
 	Because in very sort time I chose the GateIn portal to develop the requirement, 
 	which is a rich ui component portal and which I am familiar with.
@@ -38,13 +39,18 @@ This is web application base on GateIn portal to manage e-mail spammer
 	FireFox 29
 	Chrome  35
 	Internet Explorer 11
+	Mongodb server download from there http://fastdl.mongodb.org/win32/mongodb-win32-i386-2.6.1.zip
+	Help to start http://dochub.mongodb.org/core/startingandstoppingmongo
 - 2) Run test without development source code
 	I shared in this link https://drive.google.com/folderview?id=0Bw2eZ8CfkgNBRFh0NENsTHQtSXc&usp=sharing
 	and select to download the 'tomcat' bundle. It's the fastest way to have demonstrate without any development steps 
 	after get tomcat bundle, go to 'tomcat\bin' and execute :
 	Windows : 'gatein.bat run'
 	Linux|Mac OS : 'gatein.sh run'
-
+- 2.1) Start mongoDb 
+       Download mongoDb setting 'path' environment variable to 'mongodbserver\bin'
+       go to 'mailFilter' call 'mongod --dbpath ./data/db'
+       	   
 - 3) Start using application 
 	After run execution scrip in step 2 if you see this line in console :
 

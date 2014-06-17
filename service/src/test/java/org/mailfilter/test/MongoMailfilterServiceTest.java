@@ -4,6 +4,8 @@ package org.mailfilter.test;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.jcr.ItemExistsException;
+
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
@@ -32,7 +34,7 @@ public class MongoMailfilterServiceTest extends BaseServiceTestCase {
 	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
-		//for(Spammer s : storage_.listSpammer()) storage_.removeSpammer(s);	 
+		for(Spammer s : storage_.listSpammer()) storage_.removeSpammer(s);	 
 	}
 
 	private void loginUser(String userId) {
@@ -64,16 +66,39 @@ public class MongoMailfilterServiceTest extends BaseServiceTestCase {
 		return s;
 	}
 
-	
+
 
 	//mvn test -Dtest=MongoMailfilterServiceTest#testAddSpamer
-		public void testAddSpamer() throws Exception {
+	public void testAddSpamer() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+	}
+	//mvn test -Dtest=MongoMailfilterServiceTest#testRemoveSpamer
+		public void testRemoveSpamer() throws Exception {
 			Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
 			assertNotNull(storage_.addSpammer(s));
+			assertEquals(1, storage_.listSpammer().size());
+			storage_.removeSpammer(s);
+			assertEquals(0, storage_.listSpammer().size());
+	}
+
+	//mvn test -Dtest=MongoMailfilterServiceTest#testAddSpamerIfExist
+	public void testAddSpamerIfExist() throws Exception {
+		Spammer s = createSpamer("phamtuanchip@mail.com", "gmail.com", "1", "description");
+		assertNotNull(storage_.addSpammer(s));
+		s = createSpamer("phamtuanchip@mail.com", "gmail.com", "1", "description");
+		try {
+			storage_.addSpammer(s);
+		} catch (ItemExistsException ie) {
+			assertTrue(true);
+			return;
 		}
+		assertFalse(false);
 
 
-		/*
+	}
+
+	/*
 
 	//mvn test -Dtest=MongoMailfilterServiceTest#testDefaultInitliliazeSpamer
 	public void testDefaultInitliliazeSpamer() throws Exception {
@@ -82,20 +107,6 @@ public class MongoMailfilterServiceTest extends BaseServiceTestCase {
 	}
 
 
-
-	//mvn test -Dtest=MongoMailfilterServiceTest#testAddSpamerIfExist
-	public void testAddSpamerIfExist() throws Exception {
-		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
-		assertNotNull(storage_.addSpammer(s));
-		s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
-		try {
-			storage_.addSpammer(s);
-		} catch (ItemExistsException ie) {
-			assert true;
-		}
-
-
-	}
 
 	//mvn test -Dtest=MongoMailfilterServiceTest#testGetSpamerById
 	public void testGetSpamerById() throws Exception {
@@ -123,15 +134,7 @@ public class MongoMailfilterServiceTest extends BaseServiceTestCase {
 		assertEquals(1, storage_.listSpammer().size());
 	}
 
-	//mvn test -Dtest=MongoMailfilterServiceTest#testRemoveSpamer
-	public void testRemoveSpamer() throws Exception {
-		Spammer s = createSpamer("phamtuanchip@mail.com", "mail.com", "1", "description");
-		assertNotNull(storage_.addSpammer(s));
-		assertEquals(1, storage_.listSpammer().size());
-		storage_.removeSpammer(s);
-		assertEquals(0, storage_.listSpammer().size());
-	}
-
+	
 
 	//mvn test -Dtest=MongoMailfilterServiceTest#testListSpammerByStatus
 	public void testListSpammerByStatus() throws Exception {
