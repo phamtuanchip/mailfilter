@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="./bootstrap-3.2.0-dist/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="./bootstrap-3.2.0-dist/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="./bootstrap-3.2.0-dist/js/jquery-2.1.1.min.js"></script>
+<script src="./bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+ 
+
+<div class="center-block"><h4>Welcome to the mail filter system version 3</h4></div>
+
+
+
+  
+ <form name="save" id="save">
+  <p><input name="fname" placeholder="First Name" type="text"></p>
+  <p><input name="lname" placeholder="Last Name" type="text"></p>
+  <p><input name="email" placeholder="E-mail" type="email"></p>
+  <input name="somethingsecret" value="ssshhh" type="hidden">
+  <p><input value="Save" id="savebutton" type="submit"></p>
+</form>
+<table id="dbtable">
+</table>
+  
+<script>
+(function(){
+	console.log('welcome to jquery');
+	
+})();
+$("#savebutton").on("click",function(e){
+		 e.preventDefault();
+		addRow();
+});
+
+var lastID = localStorage.getItem( 'lastID' );
+ 
+// if the local storage comes up empty, reset count to zero
+function initializeID() {
+  var lastID = localStorage.getItem( 'lastID' );
+  if ( lastID == null ) {
+    location.reload(true);
+    localStorage.setItem( 'lastID',0 );
+  }
+}
+ 
+initializeID();
+
+ 
+function loadDb(uniqueID) {
+   
+  $("table#dbtable").html("").append(
+    "<thead><tr><th>#</th><th>First Name</th><th>Last Name</th><th>Username</th></tr></thead>");
+   
+  ID = 0;
+   
+  while (ID<=uniqueID) {
+    ID.toString();
+     
+    var history = localStorage.getItem(ID);
+        fname = $.parseJSON(history).fname;
+        lname = $.parseJSON(history).lname;
+        email = $.parseJSON(history).email;
+    
+    $("table#dbtable").append(
+      '<tr class="' + ID + '"><td>' + fname + '</td><td>' + lname + '</td><td>' + email + '</td></tr>');
+    ID++;
+  };  
+};
+
+var uniqueID = lastID;
+ 
+ function addRow() {
+    // get input field vars
+    var fname = $('input[name="fname"]').val();
+        lname = $('input[name="lname"]').val();
+        email = $('input[name="email"]').val();
+        somethingsecret = $('input[name="somethingsecret"]').val();
+    // convert the ID to a string so it can be used as a key
+    var formSaveID = uniqueID.toString();
+    // assign everything to an object for local storage       
+    var newFormSave = {};
+        newFormSave.id = uniqueID;
+        newFormSave.fname = fname;
+        newFormSave.lname = lname;
+        newFormSave.email = email;
+        newFormSave.somethingsecret = somethingsecret;
+    // turn data into JSON string
+    localStorage.setItem( formSaveID, JSON.stringify( newFormSave ) );
+    // reload history with new entry; see below
+    loadDb(uniqueID);
+    // increment the ID
+    uniqueID++;
+    // save next available ID (note: bugs/features in iOS demand
+    // the key be removed first, and then reset; a straight
+    // overwrite using the same key does not work)
+    localStorage.removeItem( 'lastID' );
+    localStorage.setItem( 'lastID', uniqueID );
+    // optional; this part clears all of the values in the form       
+    //$form.find('input[type="text"],input[type="email"]').val("");
+    // again optional; this is where you could actually post via Ajax
+     
+    return false;
+   
+};
+
+</script>
+</html>
